@@ -739,6 +739,17 @@ async function loadTasks() {
   render();
 }
 
+async function translateToSpanish(text) {
+  if (!text || !text.trim()) return '';
+  try {
+    const res = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=en|es`);
+    const data = await res.json();
+    return data.responseData?.translatedText || text;
+  } catch(e) {
+    return text;
+  }
+}
+
 async function saveTask() {
   if (!db) { toast('⚠️ Database not configured.'); return; }
   const f = S.form;
@@ -761,11 +772,20 @@ async function saveTask() {
     photo_url = null;
   }
 
+  // Auto-translate to Spanish
+  toast('Translating...');
+  const [title_es, description_es] = await Promise.all([
+    translateToSpanish(f.title.trim()),
+    translateToSpanish(f.description.trim()),
+  ]);
+
   const payload = {
-    title:       f.title.trim(),
-    description: f.description.trim(),
-    priority:    f.priority,
-    assigned_to: f.assigned_to.trim() || null,
+    title:          f.title.trim(),
+    description:    f.description.trim(),
+    title_es,
+    description_es,
+    priority:       f.priority,
+    assigned_to:    f.assigned_to.trim() || null,
     photo_url,
   };
   if (S.editTask) {
@@ -998,6 +1018,10 @@ function card(t) {
   const priBadge = { high:`<span class="badge bh">${T('high')}</span>`, medium:`<span class="badge bm">${T('medium')}</span>`, low:`<span class="badge bl">${T('low')}</span>` }[t.priority] || '';
   const doneBadge= isDone ? `<span class="badge bd">${T('completedAt')}</span>` : '';
 
+  // Use Spanish translations when in Spanish mode
+  const title       = (S.lang === 'es' && t.title_es)       ? t.title_es       : t.title;
+  const description = (S.lang === 'es' && t.description_es) ? t.description_es : t.description;
+
   const assignee = esc(t.assigned_to || T('unassigned'));
   const created  = fmtDate(t.created_at);
   const doneAt   = isDone && t.completed_at ? `<span>✓ ${fmtDate(t.completed_at)} ${fmtTime(t.completed_at)}</span>` : '';
@@ -1024,11 +1048,11 @@ function card(t) {
 
   return `<div class="card ${priClass}${isDone ? ' done' : ''}">
     <div class="card-top">
-      <div class="card-title">${esc(t.title)}</div>
+      <div class="card-title">${esc(title)}</div>
       <div class="card-badges">${priBadge}${doneBadge}</div>
     </div>
     ${t.photo_url ? `<img class="card-photo" src="${esc(t.photo_url)}" alt="Task photo" onclick="window.open('${esc(t.photo_url)}','_blank')">` : ''}
-    ${t.description ? `<div class="card-desc">${esc(t.description)}</div>` : ''}
+    ${description ? `<div class="card-desc">${esc(description)}</div>` : ''}
     <div class="card-meta">
       <span>👤 ${assignee}</span>
       <span>📅 ${created}</span>
