@@ -9,14 +9,8 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <style>
 :root {
-  /* CultureSpace Brand Colors */
   --blaze:      #FF4802;
   --onyx:       #2B2A28;
-  --graphite:   #5F5B58;
-  --ashwood:    #BCB7B3;
-  --canvas:     #FFFFFF;
-
-  /* App theme mapped to brand */
   --bg:         #1E1D1B;
   --surface:    #2B2A28;
   --surface2:   #3A3835;
@@ -35,719 +29,349 @@
   --text2:      #BCB7B3;
   --radius:     8px;
 }
-
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-
 body {
-  font-family: 'Helvetica Now Text', 'Helvetica Neue', 'Inter', 'Arial', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  min-height: 100vh;
-  max-width: 480px;
-  margin: 0 auto;
-  overflow-x: hidden;
-  position: relative;
+  font-family: 'Helvetica Now Text','Helvetica Neue','Inter','Arial',sans-serif;
+  background: var(--bg); color: var(--text);
+  min-height: 100vh; max-width: 480px; margin: 0 auto;
+  overflow-x: hidden; position: relative;
 }
-
 .screen { min-height: 100vh; display: flex; flex-direction: column; }
 
-/* ─── LANGUAGE SCREEN ─── */
-.lang-screen {
-  justify-content: center;
-  align-items: center;
-  padding: 48px 28px;
-  gap: 36px;
-  background: var(--bg);
-}
-
+/* LANGUAGE */
+.lang-screen { justify-content: center; align-items: center; padding: 48px 28px; gap: 36px; background: var(--bg); }
 .logo-block { text-align: center; }
-.logo-name {
-  font-family: 'Helvetica Now Display', 'Helvetica Neue', 'Inter', 'Arial', sans-serif;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 3px;
-  color: var(--text2);
-  text-transform: uppercase;
-}
-.logo-sub {
-  font-family: 'Helvetica Now Display', 'Helvetica Neue', 'Inter', 'Arial', sans-serif;
-  font-size: 28px;
-  font-weight: 700;
-  letter-spacing: -0.5px;
-  color: var(--text);
-  margin-top: 8px;
-  line-height: 1.15;
-}
-.logo-sub-es {
-  font-family: 'Helvetica Now Text', 'Helvetica Neue', 'Inter', 'Arial', sans-serif;
-  font-size: 13px;
-  font-weight: 400;
-  letter-spacing: 0.2px;
-  color: var(--text2);
-  margin-top: 6px;
-}
-.logo-bar {
-  width: 44px; height: 3px;
-  background: var(--accent);
-  border-radius: 1px;
-  margin: 16px auto 0;
-}
-
-.lang-prompt {
-  font-family: 'Helvetica Now Text', 'Helvetica Neue', 'Inter', 'Arial', sans-serif;
-  font-size: 14px;
-  letter-spacing: 0.5px;
-  color: var(--text2);
-  text-align: center;
-}
-
+.logo-name { font-size: 13px; font-weight: 700; letter-spacing: 3px; color: var(--text2); text-transform: uppercase; }
+.logo-sub { font-size: 28px; font-weight: 700; letter-spacing: -0.5px; color: var(--text); margin-top: 8px; line-height: 1.15; }
+.logo-sub-es { font-size: 13px; font-weight: 400; color: var(--text2); margin-top: 6px; }
+.logo-bar { width: 44px; height: 3px; background: var(--accent); border-radius: 1px; margin: 16px auto 0; }
+.lang-prompt { font-size: 14px; letter-spacing: 0.5px; color: var(--text2); text-align: center; }
 .lang-btns { display: flex; flex-direction: column; gap: 14px; width: 100%; max-width: 260px; }
+.lang-btn { padding: 18px 24px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--surface); color: var(--text); font-size: 16px; font-weight: 500; cursor: pointer; transition: all 0.18s; display: flex; align-items: center; justify-content: center; gap: 10px; }
+.lang-btn:hover, .lang-btn:active { border-color: var(--accent); background: var(--accent-dim); color: var(--accent); }
 
-.lang-btn {
-  padding: 18px 24px;
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
-  background: var(--surface);
-  color: var(--text);
-  font-family: 'Helvetica Now Text', 'Helvetica Neue', 'Inter', 'Arial', sans-serif;
-  font-size: 16px;
-  font-weight: 500;
-  letter-spacing: 0.3px;
-  cursor: pointer;
-  transition: all 0.18s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-}
-.lang-btn:hover, .lang-btn:active {
-  border-color: var(--accent);
-  background: var(--accent-dim);
-  color: var(--accent);
-}
-
-/* ─── PIN SCREEN ─── */
-.pin-screen {
-  justify-content: center;
-  align-items: center;
-  padding: 40px 24px;
-  gap: 28px;
-  background: var(--bg);
-}
-
+/* PIN */
+.pin-screen { justify-content: center; align-items: center; padding: 40px 24px; gap: 28px; background: var(--bg); }
 .pin-header { text-align: center; }
-.pin-title {
-  font-family: 'Helvetica Now Display', 'Helvetica Neue', 'Inter', 'Arial', sans-serif;
-  font-size: 22px;
-  font-weight: 700;
-  color: var(--text);
-  letter-spacing: -0.3px;
-}
+.pin-title { font-size: 22px; font-weight: 700; color: var(--text); letter-spacing: -0.3px; }
 .pin-hint { font-size: 14px; color: var(--text2); margin-top: 8px; line-height: 1.5; }
-
 .pin-dots { display: flex; gap: 18px; justify-content: center; }
-.pin-dot {
-  width: 20px; height: 20px;
-  border-radius: 50%;
-  border: 2px solid var(--border);
-  background: transparent;
-  transition: all 0.15s;
-}
-.pin-dot.filled { background: var(--accent); border-color: var(--accent); box-shadow: 0 0 10px rgba(249,115,22,0.4); }
-
-.pin-err {
-  min-height: 20px;
-  color: var(--high);
-  font-size: 13px;
-  text-align: center;
-  font-weight: 500;
-}
-
-.keypad {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  width: 100%;
-  max-width: 272px;
-}
-
-.key {
-  aspect-ratio: 1;
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
-  background: var(--surface);
-  color: var(--text);
-  font-family: 'Helvetica Now Text', 'Helvetica Neue', 'Inter', 'Arial', sans-serif;
-  font-size: 24px;
-  font-weight: 400;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.12s;
-  user-select: none;
-}
+.pin-dot { width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--border); background: transparent; transition: all 0.15s; }
+.pin-dot.filled { background: var(--accent); border-color: var(--accent); box-shadow: 0 0 10px rgba(255,72,2,0.4); }
+.pin-err { min-height: 20px; color: var(--high); font-size: 13px; text-align: center; font-weight: 500; }
+.keypad { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; width: 100%; max-width: 272px; }
+.key { aspect-ratio: 1; border-radius: var(--radius); border: 1px solid var(--border); background: var(--surface); color: var(--text); font-size: 24px; font-weight: 400; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.12s; user-select: none; }
 .key:active { background: var(--surface2); transform: scale(0.93); }
 .key.del { color: var(--text2); font-size: 20px; }
 .key.empty { background: transparent; border-color: transparent; pointer-events: none; }
 
-/* ─── APP HEADER ─── */
-.app-header {
-  background: var(--onyx);
-  border-bottom: 1px solid var(--border);
-  padding: 13px 16px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: sticky; top: 0; z-index: 100;
-}
+/* HEADER */
+.app-header { background: var(--onyx); border-bottom: 1px solid var(--border); padding: 13px 16px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
 .h-left { display: flex; align-items: center; gap: 10px; }
-.h-back {
-  background: none; border: none;
-  color: var(--text2); cursor: pointer;
-  font-size: 22px; padding: 2px 6px 2px 0;
-  display: flex; align-items: center;
-  transition: color 0.15s;
-}
+.h-back { background: none; border: none; color: var(--text2); cursor: pointer; font-size: 22px; padding: 2px 6px 2px 0; display: flex; align-items: center; transition: color 0.15s; }
 .h-back:hover { color: var(--text); }
-.h-title {
-  font-family: 'Helvetica Now Display', 'Helvetica Neue', 'Inter', 'Arial', sans-serif;
-  font-size: 16px; font-weight: 700;
-  letter-spacing: -0.2px; color: var(--text);
-}
+.h-title { font-size: 16px; font-weight: 700; letter-spacing: -0.2px; color: var(--text); }
 .h-right { display: flex; align-items: center; gap: 6px; }
-
-.icon-btn {
-  background: none; border: none;
-  color: var(--text2); cursor: pointer;
-  font-size: 18px; padding: 6px;
-  border-radius: 6px;
-  display: flex; align-items: center;
-  transition: all 0.15s;
-}
+.icon-btn { background: none; border: none; color: var(--text2); cursor: pointer; font-size: 18px; padding: 6px; border-radius: 6px; display: flex; align-items: center; transition: all 0.15s; }
 .icon-btn:hover { color: var(--text); background: var(--surface2); }
-
-.lang-pill {
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  color: var(--text2);
-  padding: 5px 10px;
-  border-radius: 6px;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  cursor: pointer;
-  font-family: 'DM Sans', sans-serif;
-  transition: all 0.15s;
-}
+.lang-pill { background: var(--surface2); border: 1px solid var(--border); color: var(--text2); padding: 5px 10px; border-radius: 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.5px; cursor: pointer; transition: all 0.15s; }
 .lang-pill:hover { color: var(--text); border-color: var(--accent); }
+.admin-chip { background: var(--accent); color: white; font-size: 10px; font-weight: 700; letter-spacing: 1px; padding: 2px 8px; border-radius: 3px; text-transform: uppercase; }
 
-.admin-chip {
-  background: var(--accent);
-  color: white;
-  font-size: 10px; font-weight: 700;
-  letter-spacing: 1px;
-  padding: 2px 8px;
-  border-radius: 3px;
-  text-transform: uppercase;
-  font-family: 'Helvetica Now Text', 'Helvetica Neue', 'Inter', 'Arial', sans-serif;
-}
-
-/* ─── CONTENT ─── */
+/* CONTENT */
 .content { flex: 1; padding: 16px; overflow-y: auto; padding-bottom: 80px; }
 
-/* ─── FILTER BAR ─── */
-.filter-bar {
-  display: flex; gap: 8px;
-  margin-bottom: 18px;
-  overflow-x: auto; padding-bottom: 2px;
-  scrollbar-width: none;
-}
+/* FILTERS */
+.filter-bar { display: flex; gap: 8px; margin-bottom: 18px; overflow-x: auto; padding-bottom: 2px; scrollbar-width: none; }
 .filter-bar::-webkit-scrollbar { display: none; }
-
-.pill {
-  padding: 6px 15px;
-  border-radius: 20px;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  color: var(--text2);
-  font-size: 13px; font-weight: 500;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: all 0.15s;
-  font-family: 'DM Sans', sans-serif;
-}
+.pill { padding: 6px 15px; border-radius: 20px; border: 1px solid var(--border); background: var(--surface); color: var(--text2); font-size: 13px; font-weight: 500; cursor: pointer; white-space: nowrap; transition: all 0.15s; }
 .pill.p-all    { border-color: var(--accent); background: var(--accent-dim); color: var(--accent); }
 .pill.p-high   { border-color: var(--high);   background: var(--high-dim);   color: var(--high);   }
 .pill.p-medium { border-color: var(--med);    background: var(--med-dim);    color: var(--med);    }
 .pill.p-low    { border-color: var(--low);    background: var(--low-dim);    color: var(--low);    }
 
-/* ─── SECTION LABELS ─── */
-.sec-label {
-  font-family: 'Helvetica Now Text', 'Helvetica Neue', 'Inter', 'Arial', sans-serif;
-  font-size: 11px; font-weight: 600;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--text2);
-  margin: 22px 0 10px;
-  display: flex; align-items: center; gap: 8px;
-}
+/* SECTION LABELS */
+.sec-label { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--text2); margin: 22px 0 10px; display: flex; align-items: center; gap: 8px; }
 .sec-label:first-child { margin-top: 0; }
-.sec-count {
-  background: var(--surface2);
-  color: var(--text2);
-  font-size: 11px;
-  padding: 1px 7px;
-  border-radius: 10px;
-  border: 1px solid var(--border);
-}
+.sec-count { background: var(--surface2); color: var(--text2); font-size: 11px; padding: 1px 7px; border-radius: 10px; border: 1px solid var(--border); }
 
-/* ─── TASK CARDS ─── */
-.card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-left: 3px solid var(--border);
-  border-radius: var(--radius);
-  padding: 14px;
-  margin-bottom: 10px;
-  transition: border-left-color 0.15s;
-}
+/* CARDS */
+.card { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--border); border-radius: var(--radius); padding: 14px; margin-bottom: 10px; transition: border-left-color 0.15s; }
 .card.ph { border-left-color: var(--high); }
 .card.pm { border-left-color: var(--med); }
 .card.pl { border-left-color: var(--low); }
 .card.done { opacity: 0.6; }
-
 .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 6px; }
-.card-title {
-  font-family: 'Helvetica Now Display', 'Helvetica Neue', 'Inter', 'Arial', sans-serif;
-  font-size: 16px; font-weight: 600;
-  letter-spacing: -0.2px;
-  flex: 1; line-height: 1.3;
-}
+.card-title { font-size: 16px; font-weight: 600; letter-spacing: -0.2px; flex: 1; line-height: 1.3; }
 .card-badges { display: flex; gap: 5px; flex-shrink: 0; }
-
-.badge {
-  font-size: 10px; font-weight: 700;
-  letter-spacing: 0.8px;
-  text-transform: uppercase;
-  padding: 3px 7px;
-  border-radius: 4px;
-}
-.bh { background: var(--high-dim);  color: var(--high); }
-.bm { background: var(--med-dim);   color: var(--med);  }
-.bl { background: var(--low-dim);   color: var(--low);  }
-.bd { background: var(--done-dim);  color: var(--done); }
-
-.card-desc {
-  font-size: 13px; color: var(--text2);
-  line-height: 1.55;
-  margin-bottom: 10px;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.card-meta {
-  display: flex; flex-wrap: wrap;
-  gap: 10px; margin-bottom: 12px;
-  font-size: 12px; color: var(--text2);
-}
+.badge { font-size: 10px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; padding: 3px 7px; border-radius: 4px; }
+.bh { background: var(--high-dim); color: var(--high); }
+.bm { background: var(--med-dim);  color: var(--med);  }
+.bl { background: var(--low-dim);  color: var(--low);  }
+.bd { background: var(--done-dim); color: var(--done); }
+.card-desc { font-size: 13px; color: var(--text2); line-height: 1.55; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.card-meta { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 12px; font-size: 12px; color: var(--text2); }
 .card-meta span { display: flex; align-items: center; gap: 4px; }
-
 .card-actions { display: flex; gap: 7px; flex-wrap: wrap; align-items: center; }
 
-.btn {
-  padding: 8px 13px;
-  border-radius: 6px; border: 1px solid transparent;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 13px; font-weight: 500;
-  cursor: pointer;
-  transition: all 0.15s;
-  display: flex; align-items: center; gap: 5px;
-}
-.btn-done  { background: var(--done-dim); color: var(--done);   border-color: rgba(63,185,80,0.3); flex: 1; justify-content: center; }
-.btn-done:active  { background: rgba(63,185,80,0.3); }
-.btn-open  { background: var(--accent-dim); color: var(--accent); border-color: rgba(249,115,22,0.3); }
-.btn-open:active  { background: rgba(249,115,22,0.28); }
-.btn-edit  { background: var(--surface2); color: var(--text2); border-color: var(--border); }
+/* BUTTONS */
+.btn { padding: 8px 13px; border-radius: 6px; border: 1px solid transparent; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.15s; display: flex; align-items: center; gap: 5px; }
+.btn-done  { background: var(--done-dim);   color: var(--done);   border-color: rgba(139,168,136,0.3); flex: 1; justify-content: center; }
+.btn-open  { background: var(--accent-dim); color: var(--accent); border-color: rgba(255,72,2,0.3); }
+.btn-edit  { background: var(--surface2);   color: var(--text2);  border-color: var(--border); }
 .btn-edit:hover { color: var(--text); }
-.btn-del   { background: var(--high-dim);  color: var(--high);   border-color: rgba(239,68,68,0.3); }
-.btn-del:active   { background: rgba(239,68,68,0.28); }
-
-.pri-select {
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  color: var(--text);
-  font-size: 12px;
-  padding: 7px 9px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-family: 'DM Sans', sans-serif;
-  transition: border-color 0.15s;
-}
+.btn-del   { background: var(--high-dim);   color: var(--high);   border-color: rgba(255,72,2,0.3); }
+.pri-select { background: var(--surface2); border: 1px solid var(--border); color: var(--text); font-size: 12px; padding: 7px 9px; border-radius: 6px; cursor: pointer; transition: border-color 0.15s; }
 .pri-select:focus { outline: none; border-color: var(--accent); }
 .pri-select option { background: var(--surface2); }
 
-/* ─── EMPTY STATES ─── */
-.empty {
-  text-align: center;
-  padding: 44px 24px;
-  color: var(--text2);
-}
+/* FILE ATTACHMENTS */
+.attach-btn { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 11px 14px; border: 1px dashed var(--border); border-radius: var(--radius); background: var(--surface); color: var(--text2); font-size: 14px; cursor: pointer; width: 100%; transition: all 0.15s; }
+.attach-btn:hover { border-color: var(--accent); color: var(--accent); }
+.attach-list { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
+.attach-item { display: flex; align-items: center; gap: 10px; background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 8px 10px; }
+.attach-thumb { width: 44px; height: 44px; object-fit: cover; border-radius: 4px; flex-shrink: 0; cursor: pointer; }
+.attach-icon { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; background: var(--surface); border-radius: 4px; }
+.attach-info { flex: 1; min-width: 0; }
+.attach-name { font-size: 13px; font-weight: 500; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.attach-size { font-size: 11px; color: var(--text2); margin-top: 2px; }
+.attach-remove { background: none; border: none; color: var(--text2); cursor: pointer; font-size: 18px; padding: 4px; flex-shrink: 0; transition: color 0.15s; }
+.attach-remove:hover { color: var(--high); }
+.attach-open { color: var(--text2); font-size: 12px; padding: 4px 8px; border-radius: 4px; text-decoration: none; border: 1px solid var(--border); background: var(--surface); flex-shrink: 0; transition: all 0.15s; }
+.attach-open:hover { color: var(--accent); border-color: var(--accent); }
+
+/* CARD ATTACHMENTS */
+.card-files { margin-bottom: 10px; }
+.card-file-img { width: 100%; max-height: 180px; object-fit: cover; border-radius: 6px; margin-bottom: 6px; border: 1px solid var(--border); cursor: pointer; display: block; }
+.card-file-row { display: flex; align-items: center; gap: 8px; background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 7px 10px; margin-bottom: 6px; text-decoration: none; }
+.card-file-icon { font-size: 18px; flex-shrink: 0; }
+.card-file-name { font-size: 12px; color: var(--text2); flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* EMPTY / LOADING */
+.empty { text-align: center; padding: 44px 24px; color: var(--text2); }
 .empty-icon { font-size: 46px; margin-bottom: 12px; opacity: 0.5; }
 .empty-txt { font-size: 14px; line-height: 1.6; }
-
-/* ─── LOADING ─── */
 .loading { text-align: center; padding: 40px; color: var(--text2); font-size: 14px; }
-.spinner {
-  display: inline-block;
-  width: 20px; height: 20px;
-  border: 2px solid var(--border);
-  border-top-color: var(--accent);
-  border-radius: 50%;
-  animation: spin 0.7s linear infinite;
-  margin-right: 8px;
-  vertical-align: middle;
-}
+.spinner { display: inline-block; width: 20px; height: 20px; border: 2px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.7s linear infinite; margin-right: 8px; vertical-align: middle; }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* ─── FAB ─── */
-.fab {
-  position: fixed;
-  bottom: 24px; right: 20px;
-  width: 56px; height: 56px;
-  border-radius: 4px;
-  background: var(--accent);
-  color: white;
-  border: none;
-  font-size: 30px;
-  cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 4px 20px rgba(255,72,2,0.4);
-  transition: all 0.15s;
-  z-index: 90;
-}
+/* FAB */
+.fab { position: fixed; bottom: 24px; right: 20px; width: 56px; height: 56px; border-radius: 4px; background: var(--accent); color: white; border: none; font-size: 30px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(255,72,2,0.4); transition: all 0.15s; z-index: 90; }
 .fab:active { transform: scale(0.9); }
 
-/* ─── FORM ─── */
+/* FORM */
 .form-wrap { padding: 20px 16px; display: flex; flex-direction: column; gap: 18px; }
-
 .f-group { display: flex; flex-direction: column; gap: 7px; }
-.f-label {
-  font-size: 11px; font-weight: 700;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: var(--text2);
-}
-.f-input, .f-textarea, .f-select {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  color: var(--text);
-  font-family: 'DM Sans', sans-serif;
-  font-size: 15px;
-  padding: 12px 14px;
-  width: 100%;
-  outline: none;
-  transition: border-color 0.15s;
-}
+.f-label { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--text2); }
+.f-input, .f-textarea, .f-select { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); font-family: inherit; font-size: 15px; padding: 12px 14px; width: 100%; outline: none; transition: border-color 0.15s; }
 .f-input:focus, .f-textarea:focus, .f-select:focus { border-color: var(--accent); }
 .f-textarea { min-height: 100px; resize: vertical; line-height: 1.5; }
 .f-select option { background: var(--surface2); }
-
 .f-actions { display: flex; gap: 12px; margin-top: 6px; }
-.f-save {
-  flex: 1;
-  background: var(--accent); color: white;
-  border: none;
-  padding: 14px;
-  border-radius: var(--radius);
-  font-family: 'Helvetica Now Text', 'Helvetica Neue', 'Inter', 'Arial', sans-serif;
-  font-size: 15px; font-weight: 700;
-  letter-spacing: 0.5px;
-  cursor: pointer;
-  transition: opacity 0.15s;
-  text-transform: uppercase;
-}
+.f-save { flex: 1; background: var(--accent); color: white; border: none; padding: 14px; border-radius: var(--radius); font-size: 15px; font-weight: 700; letter-spacing: 0.5px; cursor: pointer; transition: opacity 0.15s; text-transform: uppercase; }
 .f-save:active { opacity: 0.88; }
-.f-cancel {
-  background: var(--surface2);
-  color: var(--text2);
-  border: 1px solid var(--border);
-  padding: 14px 18px;
-  border-radius: var(--radius);
-  font-family: 'DM Sans', sans-serif;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 0.15s;
-}
+.f-cancel { background: var(--surface2); color: var(--text2); border: 1px solid var(--border); padding: 14px 18px; border-radius: var(--radius); font-size: 14px; cursor: pointer; transition: all 0.15s; }
 .f-cancel:hover { color: var(--text); }
 
-/* ─── SETUP NOTICE ─── */
-.setup-box {
-  background: var(--high-dim);
-  border: 1px solid rgba(239,68,68,0.35);
-  border-radius: var(--radius);
-  padding: 14px 16px;
-  margin-bottom: 16px;
-  font-size: 13px;
-  color: #f87171;
-  line-height: 1.65;
-}
+/* SETUP */
+.setup-box { background: var(--high-dim); border: 1px solid rgba(255,72,2,0.35); border-radius: var(--radius); padding: 14px 16px; margin-bottom: 16px; font-size: 13px; color: #ff8c69; line-height: 1.65; }
 .setup-box strong { display: block; margin-bottom: 4px; font-size: 14px; }
 
-/* ─── PHOTO ─── */
-.photo-upload-btn {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 14px;
-  border: 1px dashed var(--border);
-  border-radius: var(--radius);
-  background: var(--surface);
-  color: var(--text2);
-  font-family: 'Helvetica Now Text', 'Helvetica Neue', 'Inter', 'Arial', sans-serif;
-  font-size: 14px;
-  cursor: pointer;
-  width: 100%;
-  transition: all 0.15s;
-}
-.photo-upload-btn:hover { border-color: var(--accent); color: var(--accent); }
-.photo-upload-btn input { display: none; }
+/* TOAST */
+.toast { position: fixed; bottom: 86px; left: 50%; transform: translateX(-50%); background: var(--surface2); border: 1px solid var(--border); color: var(--text); padding: 11px 20px; border-radius: 8px; font-size: 14px; font-weight: 500; z-index: 300; white-space: nowrap; box-shadow: 0 6px 24px rgba(0,0,0,0.45); animation: tIn 0.2s ease; pointer-events: none; }
+@keyframes tIn { from { opacity:0; transform:translateX(-50%) translateY(8px); } to { opacity:1; transform:translateX(-50%) translateY(0); } }
 
-.photo-preview {
-  position: relative;
-  margin-top: 8px;
+/* PRINT REPORT */
+@media screen {
+  .print-report { display: none; }
 }
-.photo-preview img {
-  width: 100%;
-  max-height: 200px;
-  object-fit: cover;
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
-}
-.photo-remove {
-  position: absolute;
-  top: 6px; right: 6px;
-  background: rgba(0,0,0,0.7);
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 26px; height: 26px;
-  font-size: 14px;
-  cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-}
-
-.card-photo {
-  width: 100%;
-  max-height: 180px;
-  object-fit: cover;
-  border-radius: 6px;
-  margin-bottom: 10px;
-  border: 1px solid var(--border);
-  cursor: pointer;
-}
-
-/* ─── TOAST ─── */
-.toast {
-  position: fixed;
-  bottom: 86px; left: 50%;
-  transform: translateX(-50%);
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  color: var(--text);
-  padding: 11px 20px;
-  border-radius: 8px;
-  font-size: 14px; font-weight: 500;
-  z-index: 300;
-  white-space: nowrap;
-  box-shadow: 0 6px 24px rgba(0,0,0,0.45);
-  animation: tIn 0.2s ease;
-  pointer-events: none;
-}
-@keyframes tIn {
-  from { opacity: 0; transform: translateX(-50%) translateY(8px); }
-  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+@media print {
+  body { background: white !important; color: black !important; max-width: 100% !important; font-family: Arial, sans-serif !important; }
+  .no-print { display: none !important; }
+  .print-report { display: block !important; padding: 24px; }
+  .pr-header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 3px solid #FF4802; padding-bottom: 16px; margin-bottom: 24px; }
+  .pr-logo { font-size: 22px; font-weight: 700; color: #1a1a1a; }
+  .pr-logo span { color: #FF4802; }
+  .pr-meta { font-size: 11px; color: #666; text-align: right; line-height: 1.8; }
+  .pr-section { margin-bottom: 28px; }
+  .pr-section-title { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #888; margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 4px; }
+  .pr-task { border: 1px solid #ddd; border-left: 4px solid #ccc; border-radius: 4px; padding: 10px 12px; margin-bottom: 8px; page-break-inside: avoid; }
+  .pr-task.ph { border-left-color: #FF4802; }
+  .pr-task.pm { border-left-color: #999; }
+  .pr-task.pl { border-left-color: #6a9e67; }
+  .pr-task-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 4px; }
+  .pr-task-title { font-size: 14px; font-weight: 700; color: #1a1a1a; }
+  .pr-badge { padding: 2px 7px; border-radius: 3px; font-size: 9px; font-weight: 700; text-transform: uppercase; }
+  .pr-badge.ph { background: #ffe5e0; color: #c00; }
+  .pr-badge.pm { background: #f0f0f0; color: #555; }
+  .pr-badge.pl { background: #e5f0e5; color: #363; }
+  .pr-task-desc { font-size: 12px; color: #444; margin-bottom: 6px; }
+  .pr-task-meta { font-size: 10px; color: #777; display: flex; gap: 16px; }
+  .pr-empty { font-size: 13px; color: #aaa; font-style: italic; padding: 8px 0; }
+  .pr-footer { margin-top: 32px; border-top: 1px solid #eee; padding-top: 10px; font-size: 10px; color: #aaa; text-align: center; }
 }
 </style>
 </head>
 <body>
 <div id="app"></div>
+<div class="print-report" id="print-report"></div>
 
 <script>
-// ╔══════════════════════════════════════════════════════════╗
-// ║  ⚙️  CONFIGURATION — Edit these after Supabase setup     ║
-// ╚══════════════════════════════════════════════════════════╝
 const CFG = {
-  SUPABASE_URL:  'https://hyfkgwseyxfjolkmhrag.supabase.co',
-  SUPABASE_KEY:  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh5Zmtnd3NleXhmam9sa21ocmFnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5Njg2ODMsImV4cCI6MjA4OTU0NDY4M30.xO3Snd1n1cTzYbioTmw0P9UvA-lXv7QRB6CCvoaEG7s',
-  USER_PIN:      '88888',   // PIN for contractors (view + mark complete)
-  ADMIN_PIN:     '197486',  // PIN for Stephen (full admin access)
+  SUPABASE_URL: 'https://hyfkgwseyxfjolkmhrag.supabase.co',
+  SUPABASE_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh5Zmtnd3NleXhmam9sa21ocmFnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5Njg2ODMsImV4cCI6MjA4OTU0NDY4M30.xO3Snd1n1cTzYbioTmw0P9UvA-lXv7QRB6CCvoaEG7s',
+  USER_PIN:  '88888',
+  ADMIN_PIN: '197486',
 };
 
-// ╔══════════════════════════════════════════════════════════╗
-// ║  TRANSLATIONS (Latin American Spanish)                   ║
-// ╚══════════════════════════════════════════════════════════╝
 const TR = {
   en: {
     appName:'CS TASKS', co:'CultureSpace Operational Area', sub:'Task Manager',
     selLang:'Select Language', eng:'English', spa:'Español',
     pinTitle:'CS TASKS', pinHint:'Enter your PIN to access tasks',
     pinErr:'Incorrect PIN. Please try again.',
-    tasks:'Tasks', archive:'Task History', add:'+ Add Task',
+    tasks:'Tasks', archive:'Task History',
     all:'All', high:'High', medium:'Medium', low:'Low',
     openSec:'OPEN TASKS', doneSec:'COMPLETED TODAY',
     noOpen:'No open tasks right now. Great work! 🎉',
-    noDoneToday:'No tasks completed today.',
     noArchive:'No past completed tasks found.',
     complete:'✓ Mark Complete', reopen:'↩ Reopen',
     edit:'Edit', del:'Delete',
     assignedTo:'Assigned to', created:'Created', completedAt:'Completed',
-    unassigned:'Unassigned', noDesc:'No description.',
+    unassigned:'Unassigned',
     formNew:'New Task', formEdit:'Edit Task',
     fTitle:'Task Title *', fDesc:'Description', fPri:'Priority', fAssign:'Assign To',
+    fFiles:'Attachments', addFiles:'📎 Add Files (photos, PDFs, videos)',
     save:'SAVE TASK', cancel:'Cancel',
     delConfirm:'Delete this task permanently?',
     admin:'Admin', logout:'Sign Out',
     titleReq:'Task title is required.',
-    tDone:'Task marked complete ✓', tOpen:'Task reopened', tSaved:'Task saved!', tUpdated:'Task updated!',
-    loading:'Loading tasks...',
-    priLabel:'Priority:',
+    tDone:'Task marked complete ✓', tOpen:'Task reopened',
+    tSaved:'Task saved!', tUpdated:'Task updated!',
+    loading:'Loading tasks...', uploading:'Uploading...',
+    translating:'Translating...',
+    printReport:'Print Report', printTitle:'Task Report',
     setupTitle:'⚠️ Setup Required',
-    setupMsg:'Add your Supabase URL and API key in the CONFIG section at the top of index.html. See the setup instructions included with this file.',
-    addPhoto:'📷 Add Photo', removePhoto:'Remove photo', uploading:'Uploading photo...',
+    setupMsg:'Add your Supabase URL and API key in the CONFIG section.',
   },
   es: {
     appName:'CS TAREAS', co:'CultureSpace Operational Area', sub:'Gestor de Tareas',
     selLang:'Seleccione Idioma', eng:'English', spa:'Español',
     pinTitle:'CS TAREAS', pinHint:'Ingrese su PIN para acceder a las tareas',
     pinErr:'PIN incorrecto. Por favor intente de nuevo.',
-    tasks:'Tareas', archive:'Historial de Tareas', add:'+ Agregar Tarea',
+    tasks:'Tareas', archive:'Historial de Tareas',
     all:'Todas', high:'Alta', medium:'Media', low:'Baja',
     openSec:'TAREAS ABIERTAS', doneSec:'COMPLETADAS HOY',
     noOpen:'No hay tareas abiertas. ¡Buen trabajo! 🎉',
-    noDoneToday:'No hay tareas completadas hoy.',
     noArchive:'No se encontraron tareas completadas anteriores.',
     complete:'✓ Marcar Completa', reopen:'↩ Reabrir',
     edit:'Editar', del:'Eliminar',
     assignedTo:'Asignado a', created:'Creado', completedAt:'Completado',
-    unassigned:'Sin asignar', noDesc:'Sin descripción.',
+    unassigned:'Sin asignar',
     formNew:'Nueva Tarea', formEdit:'Editar Tarea',
     fTitle:'Título de la Tarea *', fDesc:'Descripción', fPri:'Prioridad', fAssign:'Asignar A',
+    fFiles:'Archivos adjuntos', addFiles:'📎 Agregar Archivos (fotos, PDFs, videos)',
     save:'GUARDAR TAREA', cancel:'Cancelar',
     delConfirm:'¿Eliminar esta tarea permanentemente?',
     admin:'Admin', logout:'Salir',
     titleReq:'El título de la tarea es requerido.',
-    tDone:'Tarea marcada completa ✓', tOpen:'Tarea reabierta', tSaved:'¡Tarea guardada!', tUpdated:'¡Tarea actualizada!',
-    loading:'Cargando tareas...',
-    priLabel:'Prioridad:',
+    tDone:'Tarea marcada completa ✓', tOpen:'Tarea reabierta',
+    tSaved:'¡Tarea guardada!', tUpdated:'¡Tarea actualizada!',
+    loading:'Cargando tareas...', uploading:'Subiendo...',
+    translating:'Traduciendo...',
+    printReport:'Imprimir Reporte', printTitle:'Reporte de Tareas',
     setupTitle:'⚠️ Configuración Requerida',
-    setupMsg:'Agregue su URL de Supabase y clave API en la sección CONFIG al inicio de index.html. Consulte las instrucciones de configuración incluidas.',
-    addPhoto:'📷 Agregar Foto', removePhoto:'Quitar foto', uploading:'Subiendo foto...',
+    setupMsg:'Agregue su URL de Supabase y clave API en la sección CONFIG.',
   }
 };
 
-// ╔══════════════════════════════════════════════════════════╗
-// ║  STATE                                                   ║
-// ╚══════════════════════════════════════════════════════════╝
 let S = {
-  lang:      sessionStorage.getItem('etm_lang') || null,
-  access:    sessionStorage.getItem('etm_access') || null,
-  page:      'language',
-  tasks:     [],
-  filter:    'all',
-  editTask:  null,
-  loading:   false,
-  pins:      [],
-  pinErr:    false,
-  toast:     null,
-  toastTmr:  null,
-  form:      { title:'', description:'', priority:'medium', assigned_to:'', photoFile:null, photoPreview:null },
+  lang:     sessionStorage.getItem('etm_lang')   || null,
+  access:   sessionStorage.getItem('etm_access') || null,
+  page:     'language',
+  tasks:    [],
+  files:    {}, // task_id -> array of file objects
+  filter:   'all',
+  editTask: null,
+  loading:  false,
+  pins:     [],
+  pinErr:   false,
+  toast:    null, toastTmr: null,
+  form:     { title:'', description:'', priority:'medium', assigned_to:'', newFiles:[], existingFiles:[] },
 };
 
-// Restore session on reload
-if (S.lang && S.access) {
-  S.page = 'tasks';
-} else if (S.lang) {
-  S.page = 'pin';
-}
+if (S.lang && S.access) S.page = 'tasks';
+else if (S.lang)        S.page = 'pin';
 
-// ╔══════════════════════════════════════════════════════════╗
-// ║  SUPABASE                                                ║
-// ╚══════════════════════════════════════════════════════════╝
 const isSetup = CFG.SUPABASE_URL !== 'YOUR_SUPABASE_URL';
 let db = null;
-if (isSetup) {
-  db = supabase.createClient(CFG.SUPABASE_URL, CFG.SUPABASE_KEY);
-}
+if (isSetup) db = supabase.createClient(CFG.SUPABASE_URL, CFG.SUPABASE_KEY);
 
-// ╔══════════════════════════════════════════════════════════╗
-// ║  HELPERS                                                 ║
-// ╚══════════════════════════════════════════════════════════╝
-const T = (k) => (TR[S.lang || 'en'][k] || k);
+// ── HELPERS ──────────────────────────────────────────────
+const T = k => TR[S.lang||'en'][k] || k;
 const locale = () => S.lang === 'es' ? 'es-MX' : 'en-US';
 
 function isToday(d) {
   if (!d) return false;
   const dt = new Date(d), n = new Date();
-  return dt.getFullYear() === n.getFullYear() && dt.getMonth() === n.getMonth() && dt.getDate() === n.getDate();
+  return dt.getFullYear()===n.getFullYear() && dt.getMonth()===n.getMonth() && dt.getDate()===n.getDate();
 }
+function fmtDate(d) { return d ? new Date(d).toLocaleDateString(locale(),{month:'short',day:'numeric',year:'numeric'}) : ''; }
+function fmtTime(d) { return d ? new Date(d).toLocaleTimeString(locale(),{hour:'numeric',minute:'2-digit'}) : ''; }
+function fmtSize(b) { return b > 1048576 ? (b/1048576).toFixed(1)+'MB' : Math.round(b/1024)+'KB'; }
+function esc(s) { return s ? String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;') : ''; }
 
-function fmtDate(d) {
-  if (!d) return '';
-  return new Date(d).toLocaleDateString(locale(), { month:'short', day:'numeric', year:'numeric' });
-}
-
-function fmtTime(d) {
-  if (!d) return '';
-  return new Date(d).toLocaleTimeString(locale(), { hour:'numeric', minute:'2-digit' });
-}
-
-function esc(s) {
-  if (!s) return '';
-  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+function fileIcon(type) {
+  if (!type) return '📄';
+  if (type.startsWith('image/')) return '🖼️';
+  if (type === 'application/pdf') return '📕';
+  if (type.startsWith('video/')) return '🎬';
+  if (type.startsWith('audio/')) return '🎵';
+  return '📄';
 }
 
 function toast(msg) {
   clearTimeout(S.toastTmr);
-  S.toast = msg;
-  renderToast();
-  S.toastTmr = setTimeout(() => { S.toast = null; renderToast(); }, 2600);
+  S.toast = msg; renderToast();
+  S.toastTmr = setTimeout(() => { S.toast = null; renderToast(); }, 2800);
 }
-
 function renderToast() {
   let t = document.getElementById('toast-el');
   if (S.toast) {
-    if (!t) { t = document.createElement('div'); t.id = 'toast-el'; t.className = 'toast'; document.body.appendChild(t); }
+    if (!t) { t = document.createElement('div'); t.id='toast-el'; t.className='toast'; document.body.appendChild(t); }
     t.textContent = S.toast;
-  } else {
-    if (t) t.remove();
-  }
+  } else { if (t) t.remove(); }
 }
 
-// ╔══════════════════════════════════════════════════════════╗
-// ║  DATA LAYER                                              ║
-// ╚══════════════════════════════════════════════════════════╝
-async function loadTasks() {
-  if (!db) return;
-  S.loading = true; render();
-  const { data, error } = await db.from('tasks').select('*').order('created_at', { ascending:false });
-  S.loading = false;
-  if (!error && data) S.tasks = data;
-  render();
-}
-
+// ── TRANSLATION ──────────────────────────────────────────
 async function translateToSpanish(text) {
   if (!text || !text.trim()) return '';
   try {
-    const res = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=en|es`);
-    const data = await res.json();
-    return data.responseData?.translatedText || text;
-  } catch(e) {
-    return text;
+    const r = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=en|es`);
+    const d = await r.json();
+    return d.responseData?.translatedText || text;
+  } catch { return text; }
+}
+
+// ── DATA ─────────────────────────────────────────────────
+async function loadTasks() {
+  if (!db) return;
+  S.loading = true; render();
+  const { data, error } = await db.from('tasks').select('*').order('created_at',{ascending:false});
+  if (!error && data) {
+    S.tasks = data;
+    // Load files for all tasks
+    const ids = data.map(t => t.id);
+    if (ids.length > 0) {
+      const { data: files } = await db.from('task_files').select('*').in('task_id', ids);
+      S.files = {};
+      if (files) files.forEach(f => {
+        if (!S.files[f.task_id]) S.files[f.task_id] = [];
+        S.files[f.task_id].push(f);
+      });
+    }
   }
+  S.loading = false; render();
 }
 
 async function saveTask() {
@@ -755,25 +379,7 @@ async function saveTask() {
   const f = S.form;
   if (!f.title.trim()) { alert(T('titleReq')); return; }
 
-  let photo_url = S.editTask ? S.editTask.photo_url : null;
-
-  if (f.photoFile) {
-    toast(T('uploading'));
-    const ext = f.photoFile.name.split('.').pop();
-    const fileName = `task-${Date.now()}.${ext}`;
-    const { error: uploadError } = await db.storage
-      .from('task-photos')
-      .upload(fileName, f.photoFile, { upsert: true });
-    if (!uploadError) {
-      const { data: urlData } = db.storage.from('task-photos').getPublicUrl(fileName);
-      photo_url = urlData.publicUrl;
-    }
-  } else if (f.photoPreview === null) {
-    photo_url = null;
-  }
-
-  // Auto-translate to Spanish
-  toast('Translating...');
+  toast(T('translating'));
   const [title_es, description_es] = await Promise.all([
     translateToSpanish(f.title.trim()),
     translateToSpanish(f.description.trim()),
@@ -786,66 +392,87 @@ async function saveTask() {
     description_es,
     priority:       f.priority,
     assigned_to:    f.assigned_to.trim() || null,
-    photo_url,
   };
+
+  let taskId;
   if (S.editTask) {
     await db.from('tasks').update(payload).eq('id', S.editTask.id);
+    taskId = S.editTask.id;
     toast(T('tUpdated'));
   } else {
-    await db.from('tasks').insert([{ ...payload, status:'open' }]);
+    const { data } = await db.from('tasks').insert([{...payload, status:'open'}]).select();
+    taskId = data?.[0]?.id;
     toast(T('tSaved'));
   }
-  S.editTask = null;
-  S.form = { title:'', description:'', priority:'medium', assigned_to:'', photoFile:null, photoPreview:null };
+
+  // Upload new files
+  if (taskId && f.newFiles.length > 0) {
+    toast(T('uploading'));
+    for (const file of f.newFiles) {
+      const ext = file.name.split('.').pop();
+      const fileName = `${taskId}-${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
+      const { error: upErr } = await db.storage.from('task-files').upload(fileName, file, {upsert:true});
+      if (!upErr) {
+        const { data: urlData } = db.storage.from('task-files').getPublicUrl(fileName);
+        await db.from('task_files').insert([{
+          task_id:   taskId,
+          file_url:  urlData.publicUrl,
+          file_name: file.name,
+          file_type: file.type,
+          file_size: file.size,
+        }]);
+      }
+    }
+  }
+
+  resetForm();
   S.page = 'tasks';
   await loadTasks();
 }
 
 async function completeTask(id) {
   if (!db) return;
-  await db.from('tasks').update({ status:'completed', completed_at: new Date().toISOString() }).eq('id', id);
-  toast(T('tDone'));
-  await loadTasks();
+  await db.from('tasks').update({status:'completed', completed_at: new Date().toISOString()}).eq('id',id);
+  toast(T('tDone')); await loadTasks();
 }
-
 async function reopenTask(id) {
   if (!db) return;
-  await db.from('tasks').update({ status:'open', completed_at: null }).eq('id', id);
-  toast(T('tOpen'));
-  await loadTasks();
+  await db.from('tasks').update({status:'open', completed_at: null}).eq('id',id);
+  toast(T('tOpen')); await loadTasks();
 }
-
 async function delTask(id) {
   if (!db) return;
   if (!confirm(T('delConfirm'))) return;
-  await db.from('tasks').delete().eq('id', id);
+  await db.from('task_files').delete().eq('task_id',id);
+  await db.from('tasks').delete().eq('id',id);
   await loadTasks();
 }
-
+async function delFile(fileId, taskId) {
+  if (!db) return;
+  await db.from('task_files').delete().eq('id',fileId);
+  if (S.files[taskId]) S.files[taskId] = S.files[taskId].filter(f => f.id !== fileId);
+  render();
+}
 async function setPriority(id, priority) {
   if (!db) return;
-  await db.from('tasks').update({ priority }).eq('id', id);
-  S.tasks = S.tasks.map(t => t.id === id ? { ...t, priority } : t);
+  await db.from('tasks').update({priority}).eq('id',id);
+  S.tasks = S.tasks.map(t => t.id===id ? {...t,priority} : t);
   render();
 }
 
-// ╔══════════════════════════════════════════════════════════╗
-// ║  RENDER                                                  ║
-// ╚══════════════════════════════════════════════════════════╝
+function resetForm() {
+  S.form = { title:'', description:'', priority:'medium', assigned_to:'', newFiles:[], existingFiles:[] };
+  S.editTask = null;
+}
+
+// ── RENDER ────────────────────────────────────────────────
 function render() {
   const app = document.getElementById('app');
-  const pages = {
-    language: renderLang,
-    pin:      renderPin,
-    tasks:    renderTasks,
-    archive:  renderArchive,
-    form:     renderFormPage,
-  };
-  app.innerHTML = (pages[S.page] || renderLang)();
+  const pages = { language:renderLang, pin:renderPin, tasks:renderTasks, archive:renderArchive, form:renderForm };
+  app.innerHTML = (pages[S.page]||renderLang)();
   bindEvents();
 }
 
-// — Language
 function renderLang() {
   return `<div class="screen lang-screen">
     <div class="logo-block">
@@ -862,75 +489,63 @@ function renderLang() {
   </div>`;
 }
 
-// — PIN
 function renderPin() {
   const maxLen = Math.max(CFG.USER_PIN.length, CFG.ADMIN_PIN.length);
-  const dots = Array.from({length: maxLen}, (_,i) =>
-    `<div class="pin-dot${i < S.pins.length ? ' filled' : ''}"></div>`
-  ).join('');
+  const dots = Array.from({length:maxLen},(_,i) =>
+    `<div class="pin-dot${i<S.pins.length?' filled':''}"></div>`).join('');
   return `<div class="screen pin-screen">
     <div class="pin-header">
       <div class="pin-title">${T('pinTitle')}</div>
       <div class="pin-hint">${T('pinHint')}</div>
     </div>
     <div class="pin-dots">${dots}</div>
-    <div class="pin-err">${S.pinErr ? T('pinErr') : '&nbsp;'}</div>
+    <div class="pin-err">${S.pinErr?T('pinErr'):'&nbsp;'}</div>
     <div class="keypad">
-      ${[1,2,3,4,5,6,7,8,9].map(n =>
-        `<button class="key" data-act="digit" data-v="${n}">${n}</button>`
-      ).join('')}
+      ${[1,2,3,4,5,6,7,8,9].map(n=>`<button class="key" data-act="digit" data-v="${n}">${n}</button>`).join('')}
       <div class="key empty"></div>
       <button class="key" data-act="digit" data-v="0">0</button>
-      <button class="key del" data-act="del">⌫</button>
+      <button class="key del" data-act="pin-del">⌫</button>
     </div>
   </div>`;
 }
 
-// — Tasks
 function renderTasks() {
-  const openAll    = S.tasks.filter(t => t.status === 'open');
-  const doneToday  = S.tasks.filter(t => t.status === 'completed' && isToday(t.completed_at));
-  const openFilt   = S.filter === 'all' ? openAll : openAll.filter(t => t.priority === S.filter);
-
-  const filterMap  = { all:T('all'), high:T('high'), medium:T('medium'), low:T('low') };
-  const filterHtml = Object.entries(filterMap).map(([k,label]) => {
-    const cls = S.filter === k ? `pill p-${k === 'medium' ? 'medium' : k}` : 'pill';
+  const openAll   = S.tasks.filter(t=>t.status==='open');
+  const doneToday = S.tasks.filter(t=>t.status==='completed' && isToday(t.completed_at));
+  const openFilt  = S.filter==='all' ? openAll : openAll.filter(t=>t.priority===S.filter);
+  const filterMap = {all:T('all'),high:T('high'),medium:T('medium'),low:T('low')};
+  const filterHtml = Object.entries(filterMap).map(([k,label])=>{
+    const cls = S.filter===k ? `pill p-${k==='medium'?'medium':k}` : 'pill';
     return `<button class="${cls}" data-act="filter" data-v="${k}">${label}</button>`;
   }).join('');
 
   let body = '';
-
-  if (!isSetup) {
-    body += `<div class="setup-box"><strong>${T('setupTitle')}</strong>${T('setupMsg')}</div>`;
-  }
-
+  if (!isSetup) body += `<div class="setup-box"><strong>${T('setupTitle')}</strong>${T('setupMsg')}</div>`;
   body += `<div class="filter-bar">${filterHtml}</div>`;
   body += `<div class="sec-label">${T('openSec')} <span class="sec-count">${openFilt.length}</span></div>`;
-
   if (S.loading) {
     body += `<div class="loading"><span class="spinner"></span>${T('loading')}</div>`;
-  } else if (openFilt.length === 0) {
+  } else if (openFilt.length===0) {
     body += `<div class="empty"><div class="empty-icon">✅</div><div class="empty-txt">${T('noOpen')}</div></div>`;
   } else {
-    body += openFilt.map(t => card(t)).join('');
+    body += openFilt.map(t=>card(t)).join('');
   }
-
-  if (doneToday.length > 0) {
+  if (doneToday.length>0) {
     body += `<div class="sec-label">${T('doneSec')} <span class="sec-count">${doneToday.length}</span></div>`;
-    body += doneToday.map(t => card(t)).join('');
+    body += doneToday.map(t=>card(t)).join('');
   }
 
-  const adminBit = S.access === 'admin' ? `<span class="admin-chip">${T('admin')}</span>` : '';
-  const fab      = S.access === 'admin' ? `<button class="fab" data-act="add">+</button>` : '';
+  const adminBit = S.access==='admin' ? `<span class="admin-chip">${T('admin')}</span>` : '';
+  const fab      = S.access==='admin' ? `<button class="fab no-print" data-act="add">+</button>` : '';
+  const printBtn = S.access==='admin' ? `<button class="icon-btn no-print" data-act="print" title="${T('printReport')}">🖨️</button>` : '';
 
   return `<div class="screen">
-    <div class="app-header">
-      <div class="h-left">
-        <div class="h-title">${T('appName')}</div>${adminBit}
-      </div>
+    <div class="app-header no-print">
+      <div class="h-left"><div class="h-title">${T('appName')}</div>${adminBit}</div>
       <div class="h-right">
+        ${printBtn}
         <button class="icon-btn" data-act="goto-archive" title="${T('archive')}">📋</button>
-        <button class="lang-pill" data-act="toggle-lang">${S.lang === 'es' ? 'EN' : 'ES'}</button>
+        <button class="lang-pill" data-act="toggle-lang">${S.lang==='es'?'EN':'ES'}</button>
         <button class="icon-btn" data-act="logout" title="${T('logout')}">⏻</button>
       </div>
     </div>
@@ -939,44 +554,57 @@ function renderTasks() {
   </div>`;
 }
 
-// — Archive
 function renderArchive() {
-  const past = S.tasks
-    .filter(t => t.status === 'completed' && !isToday(t.completed_at))
-    .sort((a,b) => new Date(b.completed_at) - new Date(a.completed_at));
-
-  const body = past.length === 0
+  const past = S.tasks.filter(t=>t.status==='completed'&&!isToday(t.completed_at))
+    .sort((a,b)=>new Date(b.completed_at)-new Date(a.completed_at));
+  const body = past.length===0
     ? `<div class="empty"><div class="empty-icon">📭</div><div class="empty-txt">${T('noArchive')}</div></div>`
-    : past.map(t => card(t)).join('');
-
+    : past.map(t=>card(t)).join('');
   return `<div class="screen">
     <div class="app-header">
-      <div class="h-left">
-        <button class="h-back" data-act="back">&#8592;</button>
-        <div class="h-title">${T('archive')}</div>
-      </div>
-      <div class="h-right">
-        <button class="lang-pill" data-act="toggle-lang">${S.lang === 'es' ? 'EN' : 'ES'}</button>
-      </div>
+      <div class="h-left"><button class="h-back" data-act="back">&#8592;</button><div class="h-title">${T('archive')}</div></div>
+      <div class="h-right"><button class="lang-pill" data-act="toggle-lang">${S.lang==='es'?'EN':'ES'}</button></div>
     </div>
     <div class="content">${body}</div>
   </div>`;
 }
 
-// — Form
-function renderFormPage() {
-  const f     = S.form;
-  const isEdit= !!S.editTask;
-  const pOpts = ['high','medium','low'].map(p =>
-    `<option value="${p}" ${f.priority === p ? 'selected' : ''}>${T(p)}</option>`
-  ).join('');
+function renderForm() {
+  const f = S.form;
+  const isEdit = !!S.editTask;
+  const pOpts = ['high','medium','low'].map(p=>
+    `<option value="${p}" ${f.priority===p?'selected':''}>${T(p)}</option>`).join('');
+
+  // Existing uploaded files
+  const existingHtml = f.existingFiles.map(file=>`
+    <div class="attach-item">
+      ${file.file_type?.startsWith('image/')
+        ? `<img class="attach-thumb" src="${esc(file.file_url)}" onclick="window.open('${esc(file.file_url)}','_blank')">`
+        : `<div class="attach-icon">${fileIcon(file.file_type)}</div>`}
+      <div class="attach-info">
+        <div class="attach-name">${esc(file.file_name)}</div>
+        <div class="attach-size">${fmtSize(file.file_size||0)} · Uploaded</div>
+      </div>
+      <a href="${esc(file.file_url)}" target="_blank" class="attach-open">Open</a>
+      <button class="attach-remove" data-act="del-existing-file" data-id="${file.id}" data-tid="${file.task_id}">✕</button>
+    </div>`).join('');
+
+  // New pending files
+  const newHtml = f.newFiles.map((file,i)=>`
+    <div class="attach-item">
+      ${file.type?.startsWith('image/')
+        ? `<img class="attach-thumb" src="${esc(file.preview||'')}">`
+        : `<div class="attach-icon">${fileIcon(file.type)}</div>`}
+      <div class="attach-info">
+        <div class="attach-name">${esc(file.name)}</div>
+        <div class="attach-size">${fmtSize(file.size)} · Pending</div>
+      </div>
+      <button class="attach-remove" data-act="del-new-file" data-i="${i}">✕</button>
+    </div>`).join('');
 
   return `<div class="screen">
     <div class="app-header">
-      <div class="h-left">
-        <button class="h-back" data-act="back">&#8592;</button>
-        <div class="h-title">${isEdit ? T('formEdit') : T('formNew')}</div>
-      </div>
+      <div class="h-left"><button class="h-back" data-act="back">&#8592;</button><div class="h-title">${isEdit?T('formEdit'):T('formNew')}</div></div>
     </div>
     <div class="form-wrap">
       <div class="f-group">
@@ -996,12 +624,14 @@ function renderFormPage() {
         <input class="f-input" id="fi-assign" type="text" value="${esc(f.assigned_to)}" placeholder="${T('unassigned')}">
       </div>
       <div class="f-group">
-        <label class="f-label">${T('addPhoto')}</label>
-        <label class="photo-upload-btn" id="photo-label">
-          <span>${S.form.photoPreview ? '📷 ' + T('removePhoto') + ' / Change' : T('addPhoto')}</span>
-          <input type="file" id="fi-photo" accept="image/*" capture="environment" style="display:none">
+        <label class="f-label">${T('fFiles')}</label>
+        <label class="attach-btn">
+          <span>${T('addFiles')}</span>
+          <input type="file" id="fi-files" multiple accept="image/*,video/*,.pdf,.doc,.docx,.xls,.xlsx,.txt" style="display:none">
         </label>
-        ${S.form.photoPreview ? `<div class="photo-preview"><img src="${esc(S.form.photoPreview)}"><button class="photo-remove" data-act="remove-photo">✕</button></div>` : ''}
+        <div class="attach-list" id="attach-list">
+          ${existingHtml}${newHtml}
+        </div>
       </div>
       <div class="f-actions">
         <button class="f-cancel" data-act="back">${T('cancel')}</button>
@@ -1011,86 +641,147 @@ function renderFormPage() {
   </div>`;
 }
 
-// — Task Card
 function card(t) {
-  const isDone   = t.status === 'completed';
-  const priClass = { high:'ph', medium:'pm', low:'pl' }[t.priority] || '';
-  const priBadge = { high:`<span class="badge bh">${T('high')}</span>`, medium:`<span class="badge bm">${T('medium')}</span>`, low:`<span class="badge bl">${T('low')}</span>` }[t.priority] || '';
-  const doneBadge= isDone ? `<span class="badge bd">${T('completedAt')}</span>` : '';
+  const isDone   = t.status==='completed';
+  const priClass = {high:'ph',medium:'pm',low:'pl'}[t.priority]||'';
+  const priBadge = {high:`<span class="badge bh">${T('high')}</span>`,medium:`<span class="badge bm">${T('medium')}</span>`,low:`<span class="badge bl">${T('low')}</span>`}[t.priority]||'';
+  const doneBadge = isDone ? `<span class="badge bd">${T('completedAt')}</span>` : '';
 
-  // Use Spanish translations when in Spanish mode
-  const title       = (S.lang === 'es' && t.title_es)       ? t.title_es       : t.title;
-  const description = (S.lang === 'es' && t.description_es) ? t.description_es : t.description;
+  const title       = (S.lang==='es' && t.title_es)       ? t.title_es       : t.title;
+  const description = (S.lang==='es' && t.description_es) ? t.description_es : t.description;
+  const assignee    = esc(t.assigned_to||T('unassigned'));
+  const doneAt      = isDone && t.completed_at ? `<span>✓ ${fmtDate(t.completed_at)} ${fmtTime(t.completed_at)}</span>` : '';
 
-  const assignee = esc(t.assigned_to || T('unassigned'));
-  const created  = fmtDate(t.created_at);
-  const doneAt   = isDone && t.completed_at ? `<span>✓ ${fmtDate(t.completed_at)} ${fmtTime(t.completed_at)}</span>` : '';
+  // Files
+  const taskFiles = S.files[t.id] || [];
+  let filesHtml = '';
+  if (taskFiles.length > 0) {
+    filesHtml = '<div class="card-files">';
+    taskFiles.forEach(f => {
+      if (f.file_type?.startsWith('image/')) {
+        filesHtml += `<img class="card-file-img" src="${esc(f.file_url)}" alt="${esc(f.file_name)}" onclick="window.open('${esc(f.file_url)}','_blank')">`;
+      } else {
+        filesHtml += `<a class="card-file-row" href="${esc(f.file_url)}" target="_blank">
+          <span class="card-file-icon">${fileIcon(f.file_type)}</span>
+          <span class="card-file-name">${esc(f.file_name)}</span>
+          <span style="font-size:11px;color:var(--text2);flex-shrink:0">↗</span>
+        </a>`;
+      }
+    });
+    filesHtml += '</div>';
+  }
 
-  // Priority selector — admin only, open tasks only
-  const priSel = (S.access === 'admin' && !isDone)
+  const priSel = (S.access==='admin' && !isDone)
     ? `<select class="pri-select" data-act="priority" data-id="${t.id}">
-        <option value="high"   ${t.priority==='high'   ? 'selected':''}>${T('high')}</option>
-        <option value="medium" ${t.priority==='medium' ? 'selected':''}>${T('medium')}</option>
-        <option value="low"    ${t.priority==='low'    ? 'selected':''}>${T('low')}</option>
+        <option value="high"   ${t.priority==='high'   ?'selected':''}>${T('high')}</option>
+        <option value="medium" ${t.priority==='medium' ?'selected':''}>${T('medium')}</option>
+        <option value="low"    ${t.priority==='low'    ?'selected':''}>${T('low')}</option>
        </select>` : '';
 
-  // Action buttons
   let actions = '';
-  if (!isDone) {
-    actions += `<button class="btn btn-done" data-act="complete" data-id="${t.id}">${T('complete')}</button>`;
-  } else {
-    actions += `<button class="btn btn-open" data-act="reopen" data-id="${t.id}">${T('reopen')}</button>`;
-  }
-  if (S.access === 'admin' && !isDone) {
+  if (!isDone) actions += `<button class="btn btn-done" data-act="complete" data-id="${t.id}">${T('complete')}</button>`;
+  else         actions += `<button class="btn btn-open" data-act="reopen"   data-id="${t.id}">${T('reopen')}</button>`;
+  if (S.access==='admin' && !isDone) {
     actions += `<button class="btn btn-edit" data-act="edit" data-id="${t.id}">${T('edit')}</button>`;
-    actions += `<button class="btn btn-del"  data-act="del"  data-id="${t.id}">${T('del')}</button>`;
+    actions += `<button class="btn btn-del"  data-act="del-task" data-id="${t.id}">${T('del')}</button>`;
   }
 
-  return `<div class="card ${priClass}${isDone ? ' done' : ''}">
+  return `<div class="card ${priClass}${isDone?' done':''}">
     <div class="card-top">
       <div class="card-title">${esc(title)}</div>
       <div class="card-badges">${priBadge}${doneBadge}</div>
     </div>
-    ${t.photo_url ? `<img class="card-photo" src="${esc(t.photo_url)}" alt="Task photo" onclick="window.open('${esc(t.photo_url)}','_blank')">` : ''}
+    ${filesHtml}
     ${description ? `<div class="card-desc">${esc(description)}</div>` : ''}
     <div class="card-meta">
       <span>👤 ${assignee}</span>
-      <span>📅 ${created}</span>
+      <span>📅 ${fmtDate(t.created_at)}</span>
       ${doneAt}
     </div>
-    <div class="card-actions">
-      ${priSel}
-      ${actions}
-    </div>
+    <div class="card-actions">${priSel}${actions}</div>
   </div>`;
 }
 
-// ╔══════════════════════════════════════════════════════════╗
-// ║  EVENT BINDING                                           ║
-// ╚══════════════════════════════════════════════════════════╝
+// ── PRINT REPORT ─────────────────────────────────────────
+function buildPrintReport() {
+  const open      = S.tasks.filter(t=>t.status==='open');
+  const doneToday = S.tasks.filter(t=>t.status==='completed'&&isToday(t.completed_at));
+  const archive   = S.tasks.filter(t=>t.status==='completed'&&!isToday(t.completed_at))
+                           .sort((a,b)=>new Date(b.completed_at)-new Date(a.completed_at))
+                           .slice(0,20);
+
+  const prTask = (t) => {
+    const pc = {high:'ph',medium:'pm',low:'pl'}[t.priority]||'pm';
+    const pb = {high:'Alta/High',medium:'Media/Medium',low:'Baja/Low'}[t.priority]||'';
+    const desc = (t.description_es && t.description) ? `${t.description} / ${t.description_es}` : (t.description||'');
+    return `<div class="pr-task ${pc}">
+      <div class="pr-task-header">
+        <div class="pr-task-title">${esc(t.title)}${t.title_es&&t.title_es!==t.title?` / ${esc(t.title_es)}`:''}</div>
+        <span class="pr-badge ${pc}">${pb}</span>
+      </div>
+      ${desc?`<div class="pr-task-desc">${esc(desc)}</div>`:''}
+      <div class="pr-task-meta">
+        <span>👤 ${esc(t.assigned_to||'Unassigned')}</span>
+        <span>📅 ${fmtDate(t.created_at)}</span>
+        ${t.completed_at?`<span>✓ ${fmtDate(t.completed_at)}</span>`:''}
+      </div>
+    </div>`;
+  };
+
+  const section = (title, tasks, emptyMsg) => `
+    <div class="pr-section">
+      <div class="pr-section-title">${title} (${tasks.length})</div>
+      ${tasks.length===0 ? `<div class="pr-empty">${emptyMsg}</div>` : tasks.map(prTask).join('')}
+    </div>`;
+
+  const now = new Date();
+  document.getElementById('print-report').innerHTML = `
+    <div class="pr-header">
+      <div class="pr-logo">Culture<span>Space</span> Operational Area</div>
+      <div class="pr-meta">
+        Task Report<br>
+        ${now.toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'})}<br>
+        ${now.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'})}
+      </div>
+    </div>
+    ${section('OPEN TASKS / TAREAS ABIERTAS', open, 'No open tasks.')}
+    ${section('COMPLETED TODAY / COMPLETADAS HOY', doneToday, 'None completed today.')}
+    ${archive.length>0 ? section('RECENT COMPLETED (last 20)', archive, '') : ''}
+    <div class="pr-footer">CultureSpace Operational Area · Task Manager · Confidential</div>`;
+}
+
+// ── EVENTS ────────────────────────────────────────────────
 function bindEvents() {
   document.querySelectorAll('[data-act]').forEach(el => {
-    const evt = el.tagName === 'SELECT' ? 'change' : 'click';
+    const evt = el.tagName==='SELECT' ? 'change' : 'click';
     el.addEventListener(evt, onAction);
   });
-  // Wire up photo file input
-  const photoInput = document.getElementById('fi-photo');
-  if (photoInput) {
-    photoInput.addEventListener('change', (e) => {
-      const file = e.target.files[0];
-      if (!file) return;
-      S.form.photoFile = file;
-      const reader = new FileReader();
-      reader.onload = (ev) => {
-        // Save current form values before re-render
-        S.form.title       = document.getElementById('fi-title')?.value || S.form.title;
-        S.form.description = document.getElementById('fi-desc')?.value  || S.form.description;
-        S.form.priority    = document.getElementById('fi-pri')?.value   || S.form.priority;
-        S.form.assigned_to = document.getElementById('fi-assign')?.value|| S.form.assigned_to;
-        S.form.photoPreview = ev.target.result;
-        render();
-      };
-      reader.readAsDataURL(file);
+  const fi = document.getElementById('fi-files');
+  if (fi) {
+    fi.addEventListener('change', e => {
+      const files = Array.from(e.target.files);
+      if (!files.length) return;
+      // Save current form values
+      S.form.title       = document.getElementById('fi-title')?.value  || S.form.title;
+      S.form.description = document.getElementById('fi-desc')?.value   || S.form.description;
+      S.form.priority    = document.getElementById('fi-pri')?.value    || S.form.priority;
+      S.form.assigned_to = document.getElementById('fi-assign')?.value || S.form.assigned_to;
+      let pending = files.length;
+      files.forEach(file => {
+        if (file.type.startsWith('image/')) {
+          const reader = new FileReader();
+          reader.onload = ev => {
+            file.preview = ev.target.result;
+            S.form.newFiles.push(file);
+            if (--pending === 0) render();
+          };
+          reader.readAsDataURL(file);
+        } else {
+          S.form.newFiles.push(file);
+          if (--pending === 0) render();
+        }
+      });
+      e.target.value = '';
     });
   }
 }
@@ -1100,119 +791,94 @@ async function onAction(e) {
   const act = el.dataset.act;
 
   switch(act) {
-
     case 'lang':
       S.lang = el.dataset.v;
       sessionStorage.setItem('etm_lang', S.lang);
-      S.page = 'pin'; S.pins = []; S.pinErr = false;
-      render(); break;
+      S.page='pin'; S.pins=[]; S.pinErr=false; render(); break;
 
     case 'toggle-lang':
-      S.lang = S.lang === 'en' ? 'es' : 'en';
-      sessionStorage.setItem('etm_lang', S.lang);
-      render(); break;
+      S.lang = S.lang==='en' ? 'es' : 'en';
+      sessionStorage.setItem('etm_lang', S.lang); render(); break;
 
-    case 'digit':
-      const maxPinLen = Math.max(CFG.USER_PIN.length, CFG.ADMIN_PIN.length);
-      if (S.pins.length < maxPinLen) {
+    case 'digit': {
+      const maxLen = Math.max(CFG.USER_PIN.length, CFG.ADMIN_PIN.length);
+      if (S.pins.length < maxLen) {
         S.pins = [...S.pins, el.dataset.v];
-        S.pinErr = false;
-        render();
-        // Auto-submit when we hit the length of either PIN
-        const current = S.pins.join('');
-        if (current.length === CFG.USER_PIN.length || current.length === CFG.ADMIN_PIN.length) {
-          if (current === CFG.USER_PIN || current === CFG.ADMIN_PIN) {
-            setTimeout(submitPin, 180);
-          } else if (current.length === maxPinLen) {
-            setTimeout(submitPin, 180);
-          }
-        }
+        S.pinErr = false; render();
+        const cur = S.pins.join('');
+        if (cur===CFG.USER_PIN || cur===CFG.ADMIN_PIN) { setTimeout(submitPin,180); break; }
+        if (cur.length===maxLen) setTimeout(submitPin,180);
       }
       break;
+    }
+    case 'pin-del':
+      if (S.pins.length>0) { S.pins=S.pins.slice(0,-1); S.pinErr=false; render(); } break;
 
-    case 'del':
-      if (S.pins.length > 0) { S.pins = S.pins.slice(0,-1); S.pinErr = false; render(); }
-      break;
-
-    case 'filter':
-      S.filter = el.dataset.v; render(); break;
-
-    case 'goto-archive':
-      S.page = 'archive'; render(); break;
+    case 'filter': S.filter=el.dataset.v; render(); break;
+    case 'goto-archive': S.page='archive'; render(); break;
 
     case 'back':
-      S.page = 'tasks'; S.editTask = null;
-      S.form = { title:'', description:'', priority:'medium', assigned_to:'', photoFile:null, photoPreview:null };
-      render(); break;
+      S.page='tasks'; resetForm(); render(); break;
 
     case 'add':
-      S.editTask = null;
-      S.form = { title:'', description:'', priority:'medium', assigned_to:'', photoFile:null, photoPreview:null };
-      S.page = 'form'; render(); break;
+      resetForm(); S.page='form'; render(); break;
 
-    case 'edit':
-      const te = S.tasks.find(t => t.id === el.dataset.id);
+    case 'edit': {
+      const te = S.tasks.find(t=>t.id===el.dataset.id);
       if (te) {
         S.editTask = te;
-        S.form = { title: te.title||'', description: te.description||'', priority: te.priority||'medium', assigned_to: te.assigned_to||'', photoFile:null, photoPreview: te.photo_url||null };
-        S.page = 'form'; render();
+        S.form = {
+          title: te.title||'', description: te.description||'',
+          priority: te.priority||'medium', assigned_to: te.assigned_to||'',
+          newFiles: [], existingFiles: [...(S.files[te.id]||[])],
+        };
+        S.page='form'; render();
       }
       break;
+    }
 
     case 'save':
-      S.form.title       = document.getElementById('fi-title')?.value || '';
-      S.form.description = document.getElementById('fi-desc')?.value  || '';
-      S.form.priority    = document.getElementById('fi-pri')?.value   || 'medium';
-      S.form.assigned_to = document.getElementById('fi-assign')?.value|| '';
+      S.form.title       = document.getElementById('fi-title')?.value  || '';
+      S.form.description = document.getElementById('fi-desc')?.value   || '';
+      S.form.priority    = document.getElementById('fi-pri')?.value    || 'medium';
+      S.form.assigned_to = document.getElementById('fi-assign')?.value || '';
       await saveTask(); break;
 
-    case 'remove-photo':
-      S.form.photoFile = null;
-      S.form.photoPreview = null;
+    case 'complete': await completeTask(el.dataset.id); break;
+    case 'reopen':   await reopenTask(el.dataset.id);   break;
+    case 'del-task': await delTask(el.dataset.id);      break;
+    case 'priority': await setPriority(el.dataset.id, el.value); break;
+
+    case 'del-new-file': {
+      S.form.title       = document.getElementById('fi-title')?.value  || S.form.title;
+      S.form.description = document.getElementById('fi-desc')?.value   || S.form.description;
+      S.form.priority    = document.getElementById('fi-pri')?.value    || S.form.priority;
+      S.form.assigned_to = document.getElementById('fi-assign')?.value || S.form.assigned_to;
+      S.form.newFiles.splice(parseInt(el.dataset.i), 1);
       render(); break;
+    }
+    case 'del-existing-file':
+      await delFile(el.dataset.id, el.dataset.tid); break;
 
-    case 'complete':
-      await completeTask(el.dataset.id); break;
-
-    case 'reopen':
-      await reopenTask(el.dataset.id); break;
-
-    case 'del':
-      await delTask(el.dataset.id); break;
-
-    case 'priority':
-      await setPriority(el.dataset.id, el.value); break;
+    case 'print':
+      buildPrintReport(); window.print(); break;
 
     case 'logout':
       sessionStorage.removeItem('etm_access');
-      S.access = null; S.page = 'pin'; S.pins = [];
-      render(); break;
+      S.access=null; S.page='pin'; S.pins=[]; render(); break;
   }
 }
 
 function submitPin() {
   const pin = S.pins.join('');
-  if (pin === CFG.ADMIN_PIN) {
-    S.access = 'admin';
-    sessionStorage.setItem('etm_access', 'admin');
-  } else if (pin === CFG.USER_PIN) {
-    S.access = 'user';
-    sessionStorage.setItem('etm_access', 'user');
-  } else {
-    S.pinErr = true; S.pins = [];
-    render(); return;
-  }
-  S.pins = []; S.pinErr = false;
-  S.page = 'tasks';
-  render();
-  loadTasks();
+  if      (pin===CFG.ADMIN_PIN) { S.access='admin'; sessionStorage.setItem('etm_access','admin'); }
+  else if (pin===CFG.USER_PIN)  { S.access='user';  sessionStorage.setItem('etm_access','user');  }
+  else { S.pinErr=true; S.pins=[]; render(); return; }
+  S.pins=[]; S.pinErr=false; S.page='tasks'; render(); loadTasks();
 }
 
-// ╔══════════════════════════════════════════════════════════╗
-// ║  INIT                                                    ║
-// ╚══════════════════════════════════════════════════════════╝
 render();
-if (S.page === 'tasks' && db) loadTasks();
+if (S.page==='tasks' && db) loadTasks();
 </script>
 </body>
 </html>
