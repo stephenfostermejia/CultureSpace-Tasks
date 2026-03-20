@@ -184,7 +184,7 @@ body{font-family:'Helvetica Now Text','Helvetica Neue','Inter','Arial',sans-seri
 
 /* ═══ REPORT VIEW ═══ */
 .report-screen{display:none;}
-.report-screen.active{display:flex;flex-direction:column;min-height:100vh;background:white;color:#1a1a1a;max-width:480px;margin:0 auto;font-family:'Helvetica Neue','Inter','Arial',sans-serif;}
+.report-screen.active{display:flex;flex-direction:column;position:fixed;top:0;left:0;right:0;bottom:0;background:white;color:#1a1a1a;z-index:200;overflow-y:auto;font-family:'Helvetica Neue','Inter','Arial',sans-serif;}
 .rpt-header{background:#FF4802;padding:24px 20px 20px;position:relative;}
 .rpt-logo{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.7);margin-bottom:4px;}
 .rpt-org{font-size:20px;font-weight:700;color:white;line-height:1.2;margin-bottom:2px;}
