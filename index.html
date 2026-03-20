@@ -497,6 +497,59 @@ body {
 }
 .setup-box strong { display: block; margin-bottom: 4px; font-size: 14px; }
 
+/* ─── PHOTO ─── */
+.photo-upload-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text2);
+  font-family: 'Helvetica Now Text', 'Helvetica Neue', 'Inter', 'Arial', sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.15s;
+}
+.photo-upload-btn:hover { border-color: var(--accent); color: var(--accent); }
+.photo-upload-btn input { display: none; }
+
+.photo-preview {
+  position: relative;
+  margin-top: 8px;
+}
+.photo-preview img {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+.photo-remove {
+  position: absolute;
+  top: 6px; right: 6px;
+  background: rgba(0,0,0,0.7);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 26px; height: 26px;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.card-photo {
+  width: 100%;
+  max-height: 180px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  border: 1px solid var(--border);
+  cursor: pointer;
+}
+
 /* ─── TOAST ─── */
 .toast {
   position: fixed;
@@ -564,6 +617,7 @@ const TR = {
     priLabel:'Priority:',
     setupTitle:'⚠️ Setup Required',
     setupMsg:'Add your Supabase URL and API key in the CONFIG section at the top of index.html. See the setup instructions included with this file.',
+    addPhoto:'📷 Add Photo', removePhoto:'Remove photo', uploading:'Uploading photo...',
   },
   es: {
     appName:'CS TAREAS', co:'CultureSpace Operational Area', sub:'Gestor de Tareas',
@@ -591,6 +645,7 @@ const TR = {
     priLabel:'Prioridad:',
     setupTitle:'⚠️ Configuración Requerida',
     setupMsg:'Agregue su URL de Supabase y clave API en la sección CONFIG al inicio de index.html. Consulte las instrucciones de configuración incluidas.',
+    addPhoto:'📷 Agregar Foto', removePhoto:'Quitar foto', uploading:'Subiendo foto...',
   }
 };
 
@@ -609,7 +664,7 @@ let S = {
   pinErr:    false,
   toast:     null,
   toastTmr:  null,
-  form:      { title:'', description:'', priority:'medium', assigned_to:'' },
+  form:      { title:'', description:'', priority:'medium', assigned_to:'', photoFile:null, photoPreview:null },
 };
 
 // Restore session on reload
@@ -688,11 +743,30 @@ async function saveTask() {
   if (!db) { toast('⚠️ Database not configured.'); return; }
   const f = S.form;
   if (!f.title.trim()) { alert(T('titleReq')); return; }
+
+  let photo_url = S.editTask ? S.editTask.photo_url : null;
+
+  if (f.photoFile) {
+    toast(T('uploading'));
+    const ext = f.photoFile.name.split('.').pop();
+    const fileName = `task-${Date.now()}.${ext}`;
+    const { error: uploadError } = await db.storage
+      .from('task-photos')
+      .upload(fileName, f.photoFile, { upsert: true });
+    if (!uploadError) {
+      const { data: urlData } = db.storage.from('task-photos').getPublicUrl(fileName);
+      photo_url = urlData.publicUrl;
+    }
+  } else if (f.photoPreview === null) {
+    photo_url = null;
+  }
+
   const payload = {
     title:       f.title.trim(),
     description: f.description.trim(),
     priority:    f.priority,
     assigned_to: f.assigned_to.trim() || null,
+    photo_url,
   };
   if (S.editTask) {
     await db.from('tasks').update(payload).eq('id', S.editTask.id);
@@ -702,7 +776,7 @@ async function saveTask() {
     toast(T('tSaved'));
   }
   S.editTask = null;
-  S.form = { title:'', description:'', priority:'medium', assigned_to:'' };
+  S.form = { title:'', description:'', priority:'medium', assigned_to:'', photoFile:null, photoPreview:null };
   S.page = 'tasks';
   await loadTasks();
 }
@@ -901,6 +975,14 @@ function renderFormPage() {
         <label class="f-label">${T('fAssign')}</label>
         <input class="f-input" id="fi-assign" type="text" value="${esc(f.assigned_to)}" placeholder="${T('unassigned')}">
       </div>
+      <div class="f-group">
+        <label class="f-label">${T('addPhoto')}</label>
+        <label class="photo-upload-btn" id="photo-label">
+          <span>${S.form.photoPreview ? '📷 ' + T('removePhoto') + ' / Change' : T('addPhoto')}</span>
+          <input type="file" id="fi-photo" accept="image/*" capture="environment" style="display:none">
+        </label>
+        ${S.form.photoPreview ? `<div class="photo-preview"><img src="${esc(S.form.photoPreview)}"><button class="photo-remove" data-act="remove-photo">✕</button></div>` : ''}
+      </div>
       <div class="f-actions">
         <button class="f-cancel" data-act="back">${T('cancel')}</button>
         <button class="f-save" data-act="save">${T('save')}</button>
@@ -945,6 +1027,7 @@ function card(t) {
       <div class="card-title">${esc(t.title)}</div>
       <div class="card-badges">${priBadge}${doneBadge}</div>
     </div>
+    ${t.photo_url ? `<img class="card-photo" src="${esc(t.photo_url)}" alt="Task photo" onclick="window.open('${esc(t.photo_url)}','_blank')">` : ''}
     ${t.description ? `<div class="card-desc">${esc(t.description)}</div>` : ''}
     <div class="card-meta">
       <span>👤 ${assignee}</span>
@@ -966,6 +1049,26 @@ function bindEvents() {
     const evt = el.tagName === 'SELECT' ? 'change' : 'click';
     el.addEventListener(evt, onAction);
   });
+  // Wire up photo file input
+  const photoInput = document.getElementById('fi-photo');
+  if (photoInput) {
+    photoInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      S.form.photoFile = file;
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        // Save current form values before re-render
+        S.form.title       = document.getElementById('fi-title')?.value || S.form.title;
+        S.form.description = document.getElementById('fi-desc')?.value  || S.form.description;
+        S.form.priority    = document.getElementById('fi-pri')?.value   || S.form.priority;
+        S.form.assigned_to = document.getElementById('fi-assign')?.value|| S.form.assigned_to;
+        S.form.photoPreview = ev.target.result;
+        render();
+      };
+      reader.readAsDataURL(file);
+    });
+  }
 }
 
 async function onAction(e) {
@@ -1015,19 +1118,19 @@ async function onAction(e) {
 
     case 'back':
       S.page = 'tasks'; S.editTask = null;
-      S.form = { title:'', description:'', priority:'medium', assigned_to:'' };
+      S.form = { title:'', description:'', priority:'medium', assigned_to:'', photoFile:null, photoPreview:null };
       render(); break;
 
     case 'add':
       S.editTask = null;
-      S.form = { title:'', description:'', priority:'medium', assigned_to:'' };
+      S.form = { title:'', description:'', priority:'medium', assigned_to:'', photoFile:null, photoPreview:null };
       S.page = 'form'; render(); break;
 
     case 'edit':
       const te = S.tasks.find(t => t.id === el.dataset.id);
       if (te) {
         S.editTask = te;
-        S.form = { title: te.title||'', description: te.description||'', priority: te.priority||'medium', assigned_to: te.assigned_to||'' };
+        S.form = { title: te.title||'', description: te.description||'', priority: te.priority||'medium', assigned_to: te.assigned_to||'', photoFile:null, photoPreview: te.photo_url||null };
         S.page = 'form'; render();
       }
       break;
@@ -1038,6 +1141,11 @@ async function onAction(e) {
       S.form.priority    = document.getElementById('fi-pri')?.value   || 'medium';
       S.form.assigned_to = document.getElementById('fi-assign')?.value|| '';
       await saveTask(); break;
+
+    case 'remove-photo':
+      S.form.photoFile = null;
+      S.form.photoPreview = null;
+      render(); break;
 
     case 'complete':
       await completeTask(el.dataset.id); break;
