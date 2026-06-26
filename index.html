@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Evoque Task Manager</title>
+<title>CultureSpace Tasks</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
@@ -13,8 +13,8 @@
   --surface:    #161B22;
   --surface2:   #21262D;
   --border:     #30363D;
-  --accent:     #F97316;
-  --accent-dim: rgba(249,115,22,0.15);
+  --accent:     #FF4802;
+  --accent-dim: rgba(255,72,2,0.15);
   --high:       #EF4444;
   --high-dim:   rgba(239,68,68,0.15);
   --med:        #F59E0B;
@@ -43,844 +43,486 @@ body {
 
 .screen { min-height: 100vh; display: flex; flex-direction: column; }
 
-/* ─── LANGUAGE SCREEN ─── */
 .lang-screen {
   justify-content: center;
   align-items: center;
   padding: 48px 28px;
   gap: 36px;
-  background: radial-gradient(ellipse at 50% 0%, rgba(249,115,22,0.08) 0%, transparent 65%);
+  background: radial-gradient(ellipse at 50% 0%, rgba(255,72,2,0.08) 0%, transparent 65%);
 }
 
 .logo-block { text-align: center; }
 .logo-name {
   font-family: 'Barlow Condensed', sans-serif;
-  font-size: 36px;
-  font-weight: 700;
-  letter-spacing: 3px;
-  color: var(--accent);
+  font-size: 36px; font-weight: 700;
+  letter-spacing: 3px; color: var(--accent);
   text-transform: uppercase;
 }
-.logo-sub {
-  font-size: 12px;
-  letter-spacing: 2.5px;
-  text-transform: uppercase;
-  color: var(--text2);
-  margin-top: 5px;
-}
-.logo-bar {
-  width: 44px; height: 3px;
-  background: var(--accent);
-  border-radius: 2px;
-  margin: 16px auto 0;
-}
-
-.lang-prompt {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 18px;
-  letter-spacing: 1px;
-  color: var(--text2);
-  text-align: center;
-}
-
+.logo-sub { font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--text2); margin-top: 5px; }
+.logo-bar { width: 44px; height: 3px; background: var(--accent); border-radius: 2px; margin: 16px auto 0; }
+.lang-prompt { font-family: 'Barlow Condensed', sans-serif; font-size: 18px; letter-spacing: 1px; color: var(--text2); text-align: center; }
 .lang-btns { display: flex; flex-direction: column; gap: 14px; width: 100%; max-width: 260px; }
-
 .lang-btn {
-  padding: 18px 24px;
-  border-radius: var(--radius);
-  border: 2px solid var(--border);
-  background: var(--surface);
-  color: var(--text);
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 21px;
-  font-weight: 600;
-  letter-spacing: 1px;
-  cursor: pointer;
-  transition: all 0.18s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
+  padding: 18px 24px; border-radius: var(--radius);
+  border: 2px solid var(--border); background: var(--surface); color: var(--text);
+  font-family: 'Barlow Condensed', sans-serif; font-size: 21px; font-weight: 600;
+  letter-spacing: 1px; cursor: pointer; transition: all 0.18s;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
 }
-.lang-btn:hover, .lang-btn:active {
-  border-color: var(--accent);
-  background: var(--accent-dim);
-  color: var(--accent);
-}
+.lang-btn:hover, .lang-btn:active { border-color: var(--accent); background: var(--accent-dim); color: var(--accent); }
 
-/* ─── PIN SCREEN ─── */
-.pin-screen {
-  justify-content: center;
-  align-items: center;
-  padding: 40px 24px;
-  gap: 28px;
-  background: radial-gradient(ellipse at 50% 0%, rgba(249,115,22,0.06) 0%, transparent 65%);
-}
-
+.pin-screen { justify-content: center; align-items: center; padding: 40px 24px; gap: 28px; background: radial-gradient(ellipse at 50% 0%, rgba(255,72,2,0.06) 0%, transparent 65%); }
 .pin-header { text-align: center; }
-.pin-title {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 28px;
-  font-weight: 700;
-  color: var(--accent);
-  letter-spacing: 2px;
-  text-transform: uppercase;
-}
+.pin-title { font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 700; color: var(--accent); letter-spacing: 2px; text-transform: uppercase; }
 .pin-hint { font-size: 14px; color: var(--text2); margin-top: 8px; line-height: 1.5; }
-
 .pin-dots { display: flex; gap: 18px; justify-content: center; }
-.pin-dot {
-  width: 20px; height: 20px;
-  border-radius: 50%;
-  border: 2px solid var(--border);
-  background: transparent;
-  transition: all 0.15s;
-}
-.pin-dot.filled { background: var(--accent); border-color: var(--accent); box-shadow: 0 0 10px rgba(249,115,22,0.4); }
-
-.pin-err {
-  min-height: 20px;
-  color: var(--high);
-  font-size: 13px;
-  text-align: center;
-  font-weight: 500;
-}
-
-.keypad {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  width: 100%;
-  max-width: 272px;
-}
-
-.key {
-  aspect-ratio: 1;
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
-  background: var(--surface);
-  color: var(--text);
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 30px;
-  font-weight: 600;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.12s;
-  user-select: none;
-}
+.pin-dot { width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--border); background: transparent; transition: all 0.15s; }
+.pin-dot.filled { background: var(--accent); border-color: var(--accent); box-shadow: 0 0 10px rgba(255,72,2,0.4); }
+.pin-err { min-height: 20px; color: var(--high); font-size: 13px; text-align: center; font-weight: 500; }
+.keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; width: 100%; max-width: 272px; }
+.key { aspect-ratio: 1; border-radius: var(--radius); border: 1px solid var(--border); background: var(--surface); color: var(--text); font-family: 'Barlow Condensed', sans-serif; font-size: 30px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.12s; user-select: none; }
 .key:active { background: var(--surface2); transform: scale(0.93); }
 .key.del { color: var(--text2); font-size: 24px; }
 .key.empty { background: transparent; border-color: transparent; pointer-events: none; }
 
-/* ─── APP HEADER ─── */
-.app-header {
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
-  padding: 13px 16px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: sticky; top: 0; z-index: 100;
-}
+.app-header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 13px 16px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
 .h-left { display: flex; align-items: center; gap: 10px; }
-.h-back {
-  background: none; border: none;
-  color: var(--text2); cursor: pointer;
-  font-size: 22px; padding: 2px 6px 2px 0;
-  display: flex; align-items: center;
-  transition: color 0.15s;
-}
+.h-back { background: none; border: none; color: var(--text2); cursor: pointer; font-size: 22px; padding: 2px 6px 2px 0; display: flex; align-items: center; transition: color 0.15s; }
 .h-back:hover { color: var(--text); }
-.h-title {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 20px; font-weight: 700;
-  letter-spacing: 1.5px; color: var(--text);
-  text-transform: uppercase;
-}
+.h-title { font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 700; letter-spacing: 1.5px; color: var(--text); text-transform: uppercase; }
 .h-right { display: flex; align-items: center; gap: 6px; }
-
-.icon-btn {
-  background: none; border: none;
-  color: var(--text2); cursor: pointer;
-  font-size: 18px; padding: 6px;
-  border-radius: 6px;
-  display: flex; align-items: center;
-  transition: all 0.15s;
-}
+.icon-btn { background: none; border: none; color: var(--text2); cursor: pointer; font-size: 18px; padding: 6px; border-radius: 6px; display: flex; align-items: center; transition: all 0.15s; }
 .icon-btn:hover { color: var(--text); background: var(--surface2); }
-
-.lang-pill {
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  color: var(--text2);
-  padding: 5px 10px;
-  border-radius: 6px;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  cursor: pointer;
-  font-family: 'DM Sans', sans-serif;
-  transition: all 0.15s;
-}
+.lang-pill { background: var(--surface2); border: 1px solid var(--border); color: var(--text2); padding: 5px 10px; border-radius: 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.5px; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.15s; }
 .lang-pill:hover { color: var(--text); border-color: var(--accent); }
+.admin-chip { background: var(--accent-dim); color: var(--accent); font-size: 10px; font-weight: 700; letter-spacing: 1px; padding: 2px 7px; border-radius: 4px; text-transform: uppercase; font-family: 'Barlow Condensed', sans-serif; }
 
-.admin-chip {
-  background: var(--accent-dim);
-  color: var(--accent);
-  font-size: 10px; font-weight: 700;
-  letter-spacing: 1px;
-  padding: 2px 7px;
-  border-radius: 4px;
-  text-transform: uppercase;
-  font-family: 'Barlow Condensed', sans-serif;
-}
-
-/* ─── CONTENT ─── */
 .content { flex: 1; padding: 16px; overflow-y: auto; padding-bottom: 80px; }
 
-/* ─── FILTER BAR ─── */
-.filter-bar {
-  display: flex; gap: 8px;
-  margin-bottom: 18px;
-  overflow-x: auto; padding-bottom: 2px;
-  scrollbar-width: none;
-}
+.filter-bar { display: flex; gap: 8px; margin-bottom: 18px; overflow-x: auto; padding-bottom: 2px; scrollbar-width: none; }
 .filter-bar::-webkit-scrollbar { display: none; }
+.pill { padding: 6px 15px; border-radius: 20px; border: 1px solid var(--border); background: var(--surface); color: var(--text2); font-size: 13px; font-weight: 500; cursor: pointer; white-space: nowrap; transition: all 0.15s; font-family: 'DM Sans', sans-serif; }
+.pill:hover { border-color: var(--accent); color: var(--text); }
+.pill.active { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
 
-.pill {
-  padding: 6px 15px;
-  border-radius: 20px;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  color: var(--text2);
-  font-size: 13px; font-weight: 500;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: all 0.15s;
-  font-family: 'DM Sans', sans-serif;
-}
-.pill.p-all    { border-color: var(--accent); background: var(--accent-dim); color: var(--accent); }
-.pill.p-high   { border-color: var(--high);   background: var(--high-dim);   color: var(--high);   }
-.pill.p-medium { border-color: var(--med);    background: var(--med-dim);    color: var(--med);    }
-.pill.p-low    { border-color: var(--low);    background: var(--low-dim);    color: var(--low);    }
+.sec-label { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--text2); margin: 20px 0 10px; display: flex; align-items: center; gap: 8px; }
+.sec-count { background: var(--surface2); border-radius: 10px; padding: 1px 7px; font-size: 12px; font-weight: 600; color: var(--text2); }
 
-/* ─── SECTION LABELS ─── */
-.sec-label {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 12px; font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--text2);
-  margin: 22px 0 10px;
-  display: flex; align-items: center; gap: 8px;
-}
-.sec-label:first-child { margin-top: 0; }
-.sec-count {
-  background: var(--surface2);
-  color: var(--text2);
-  font-size: 11px;
-  padding: 1px 7px;
-  border-radius: 10px;
-  border: 1px solid var(--border);
-}
-
-/* ─── TASK CARDS ─── */
-.card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-left: 3px solid var(--border);
-  border-radius: var(--radius);
-  padding: 14px;
-  margin-bottom: 10px;
-  transition: border-left-color 0.15s;
-}
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; margin-bottom: 10px; border-left: 3px solid var(--border); transition: border-color 0.15s; }
 .card.ph { border-left-color: var(--high); }
 .card.pm { border-left-color: var(--med); }
 .card.pl { border-left-color: var(--low); }
-.card.done { opacity: 0.6; }
-
-.card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 6px; }
-.card-title {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 18px; font-weight: 600;
-  letter-spacing: 0.3px;
-  flex: 1; line-height: 1.3;
-}
-.card-badges { display: flex; gap: 5px; flex-shrink: 0; }
-
-.badge {
-  font-size: 10px; font-weight: 700;
-  letter-spacing: 0.8px;
-  text-transform: uppercase;
-  padding: 3px 7px;
-  border-radius: 4px;
-}
-.bh { background: var(--high-dim);  color: var(--high); }
-.bm { background: var(--med-dim);   color: var(--med);  }
-.bl { background: var(--low-dim);   color: var(--low);  }
-.bd { background: var(--done-dim);  color: var(--done); }
-
-.card-desc {
-  font-size: 13px; color: var(--text2);
-  line-height: 1.55;
-  margin-bottom: 10px;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.card-meta {
-  display: flex; flex-wrap: wrap;
-  gap: 10px; margin-bottom: 12px;
-  font-size: 12px; color: var(--text2);
-}
-.card-meta span { display: flex; align-items: center; gap: 4px; }
-
-.card-actions { display: flex; gap: 7px; flex-wrap: wrap; align-items: center; }
-
-.btn {
-  padding: 8px 13px;
-  border-radius: 6px; border: 1px solid transparent;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 13px; font-weight: 500;
-  cursor: pointer;
-  transition: all 0.15s;
-  display: flex; align-items: center; gap: 5px;
-}
-.btn-done  { background: var(--done-dim); color: var(--done);   border-color: rgba(63,185,80,0.3); flex: 1; justify-content: center; }
-.btn-done:active  { background: rgba(63,185,80,0.3); }
-.btn-open  { background: var(--accent-dim); color: var(--accent); border-color: rgba(249,115,22,0.3); }
-.btn-open:active  { background: rgba(249,115,22,0.28); }
-.btn-edit  { background: var(--surface2); color: var(--text2); border-color: var(--border); }
+.card.done { opacity: 0.65; }
+.card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; margin-bottom: 6px; }
+.card-title { font-weight: 600; font-size: 15px; line-height: 1.35; flex: 1; }
+.card-badges { display: flex; gap: 5px; flex-shrink: 0; flex-wrap: wrap; justify-content: flex-end; }
+.badge { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; padding: 2px 7px; border-radius: 4px; }
+.bh { background: var(--high-dim); color: var(--high); }
+.bm { background: var(--med-dim); color: var(--med); }
+.bl { background: var(--low-dim); color: var(--low); }
+.bd { background: var(--done-dim); color: var(--done); }
+.card-desc { font-size: 13px; color: var(--text2); margin-bottom: 8px; line-height: 1.5; }
+.card-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+.card-chip { font-size: 11px; color: var(--text2); background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 2px 7px; }
+.card-meta { display: flex; flex-wrap: wrap; gap: 10px; font-size: 12px; color: var(--text2); margin-bottom: 10px; }
+.card-files { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+.file-thumb { width: 56px; height: 56px; border-radius: 6px; object-fit: cover; border: 1px solid var(--border); cursor: pointer; }
+.file-link { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--accent); background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 4px 8px; text-decoration: none; cursor: pointer; }
+.card-checklist { margin-bottom: 10px; }
+.checklist-progress { font-size: 12px; color: var(--text2); margin-bottom: 6px; font-weight: 500; }
+.checklist-item { display: flex; align-items: center; gap: 8px; padding: 6px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+.checklist-item:last-child { border-bottom: none; }
+.checklist-item input[type=checkbox] { accent-color: var(--accent); width: 16px; height: 16px; cursor: pointer; }
+.checklist-item.checked span { text-decoration: line-through; color: var(--text2); }
+.card-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.pri-select { background: var(--surface2); border: 1px solid var(--border); color: var(--text2); font-size: 12px; border-radius: 6px; padding: 5px 8px; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+.btn { padding: 7px 14px; border-radius: 6px; border: none; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.15s; font-family: 'DM Sans', sans-serif; letter-spacing: 0.2px; }
+.btn-done { background: var(--accent); color: #fff; }
+.btn-done:hover { opacity: 0.88; }
+.btn-open { background: var(--done-dim); color: var(--done); }
+.btn-open:hover { background: var(--done); color: #fff; }
+.btn-edit { background: var(--surface2); color: var(--text2); border: 1px solid var(--border); }
 .btn-edit:hover { color: var(--text); }
-.btn-del   { background: var(--high-dim);  color: var(--high);   border-color: rgba(239,68,68,0.3); }
-.btn-del:active   { background: rgba(239,68,68,0.28); }
+.btn-del { background: var(--high-dim); color: var(--high); }
+.btn-del:hover { background: var(--high); color: #fff; }
 
-.pri-select {
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  color: var(--text);
-  font-size: 12px;
-  padding: 7px 9px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-family: 'DM Sans', sans-serif;
-  transition: border-color 0.15s;
-}
-.pri-select:focus { outline: none; border-color: var(--accent); }
-.pri-select option { background: var(--surface2); }
+.fab { position: fixed; bottom: 24px; right: 50%; transform: translateX(50%); width: 56px; height: 56px; border-radius: 50%; background: var(--accent); color: #fff; font-size: 28px; font-weight: 300; border: none; cursor: pointer; box-shadow: 0 4px 20px rgba(255,72,2,0.45); display: flex; align-items: center; justify-content: center; transition: all 0.18s; z-index: 50; }
+.fab:active { transform: translateX(50%) scale(0.93); }
 
-/* ─── EMPTY STATES ─── */
-.empty {
-  text-align: center;
-  padding: 44px 24px;
-  color: var(--text2);
-}
-.empty-icon { font-size: 46px; margin-bottom: 12px; opacity: 0.5; }
-.empty-txt { font-size: 14px; line-height: 1.6; }
-
-/* ─── LOADING ─── */
-.loading { text-align: center; padding: 40px; color: var(--text2); font-size: 14px; }
-.spinner {
-  display: inline-block;
-  width: 20px; height: 20px;
-  border: 2px solid var(--border);
-  border-top-color: var(--accent);
-  border-radius: 50%;
-  animation: spin 0.7s linear infinite;
-  margin-right: 8px;
-  vertical-align: middle;
-}
+.loading { text-align: center; padding: 48px 24px; color: var(--text2); display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.spinner { width: 30px; height: 30px; border: 3px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; display: block; }
 @keyframes spin { to { transform: rotate(360deg); } }
+.empty { text-align: center; padding: 56px 24px; color: var(--text2); }
+.empty-icon { font-size: 40px; margin-bottom: 12px; }
+.empty-txt { font-size: 15px; }
 
-/* ─── FAB ─── */
-.fab {
-  position: fixed;
-  bottom: 24px; right: 20px;
-  width: 56px; height: 56px;
-  border-radius: 50%;
-  background: var(--accent);
-  color: white;
-  border: none;
-  font-size: 30px;
-  cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 4px 20px rgba(249,115,22,0.45);
-  transition: all 0.15s;
-  z-index: 90;
-}
-.fab:active { transform: scale(0.9); }
+.toast { position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%); background: var(--surface2); border: 1px solid var(--border); color: var(--text); padding: 10px 20px; border-radius: 8px; font-size: 14px; z-index: 999; white-space: nowrap; animation: fadeUp 0.25s ease, fadeOut 0.3s ease 2.2s forwards; }
+@keyframes fadeUp { from { opacity: 0; transform: translateX(-50%) translateY(8px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
+@keyframes fadeOut { to { opacity: 0; } }
 
-/* ─── FORM ─── */
-.form-wrap { padding: 20px 16px; display: flex; flex-direction: column; gap: 18px; }
-
-.f-group { display: flex; flex-direction: column; gap: 7px; }
-.f-label {
-  font-size: 11px; font-weight: 700;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: var(--text2);
-}
-.f-input, .f-textarea, .f-select {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  color: var(--text);
-  font-family: 'DM Sans', sans-serif;
-  font-size: 15px;
-  padding: 12px 14px;
-  width: 100%;
-  outline: none;
-  transition: border-color 0.15s;
-}
-.f-input:focus, .f-textarea:focus, .f-select:focus { border-color: var(--accent); }
-.f-textarea { min-height: 100px; resize: vertical; line-height: 1.5; }
+.form-wrap { padding: 20px 16px 80px; display: flex; flex-direction: column; gap: 18px; }
+.f-group { display: flex; flex-direction: column; gap: 6px; }
+.f-label { font-size: 12px; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; color: var(--text2); font-family: 'Barlow Condensed', sans-serif; }
+.f-input, .f-textarea, .f-select { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); font-size: 15px; padding: 12px 14px; font-family: 'DM Sans', sans-serif; transition: border-color 0.15s; width: 100%; }
+.f-input:focus, .f-textarea:focus, .f-select:focus { outline: none; border-color: var(--accent); }
+.f-textarea { min-height: 90px; resize: vertical; }
 .f-select option { background: var(--surface2); }
+.f-row { display: flex; gap: 12px; }
+.f-row .f-group { flex: 1; }
 
-.f-actions { display: flex; gap: 12px; margin-top: 6px; }
-.f-save {
-  flex: 1;
-  background: var(--accent); color: white;
-  border: none;
-  padding: 14px;
-  border-radius: var(--radius);
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 19px; font-weight: 700;
-  letter-spacing: 1px;
-  cursor: pointer;
-  transition: opacity 0.15s;
-}
+.file-upload-area { border: 2px dashed var(--border); border-radius: var(--radius); padding: 20px; text-align: center; cursor: pointer; transition: all 0.15s; }
+.file-upload-area:hover { border-color: var(--accent); background: var(--accent-dim); }
+.file-upload-icon { font-size: 28px; margin-bottom: 6px; }
+.file-upload-txt { font-size: 13px; color: var(--text2); }
+.file-upload-input { display: none; }
+.file-preview-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.file-preview-item { position: relative; width: 72px; height: 72px; }
+.file-preview-item img { width: 100%; height: 100%; object-fit: cover; border-radius: 6px; border: 1px solid var(--border); }
+.file-preview-item .file-icon { width: 100%; height: 100%; background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 22px; gap: 2px; }
+.file-preview-item .file-icon span { font-size: 10px; color: var(--text2); }
+.file-remove { position: absolute; top: -6px; right: -6px; width: 18px; height: 18px; background: var(--high); color: #fff; border: none; border-radius: 50%; font-size: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; line-height: 1; }
+
+.checklist-builder { display: flex; flex-direction: column; gap: 8px; }
+.checklist-builder-item { display: flex; align-items: center; gap: 8px; background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 8px 10px; }
+.checklist-builder-item input[type=text] { flex: 1; background: none; border: none; color: var(--text); font-size: 14px; font-family: 'DM Sans', sans-serif; outline: none; }
+.checklist-item-remove { background: none; border: none; color: var(--text2); cursor: pointer; font-size: 18px; line-height: 1; padding: 0 2px; }
+.add-checklist-btn { background: var(--surface2); border: 1px dashed var(--border); color: var(--text2); border-radius: 6px; padding: 10px; cursor: pointer; font-size: 13px; font-family: 'DM Sans', sans-serif; transition: all 0.15s; text-align: center; }
+.add-checklist-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+.f-actions { display: flex; gap: 12px; padding-top: 4px; }
+.f-cancel { flex: 1; padding: 14px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--surface2); color: var(--text2); font-size: 15px; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+.f-save { flex: 2; padding: 14px; border-radius: var(--radius); border: none; background: var(--accent); color: #fff; font-size: 15px; font-weight: 700; cursor: pointer; font-family: 'DM Sans', sans-serif; letter-spacing: 0.3px; }
 .f-save:active { opacity: 0.88; }
-.f-cancel {
-  background: var(--surface2);
-  color: var(--text2);
-  border: 1px solid var(--border);
-  padding: 14px 18px;
-  border-radius: var(--radius);
-  font-family: 'DM Sans', sans-serif;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 0.15s;
-}
-.f-cancel:hover { color: var(--text); }
+.f-save:disabled { opacity: 0.5; pointer-events: none; }
 
-/* ─── SETUP NOTICE ─── */
-.setup-box {
-  background: var(--high-dim);
-  border: 1px solid rgba(239,68,68,0.35);
-  border-radius: var(--radius);
-  padding: 14px 16px;
-  margin-bottom: 16px;
-  font-size: 13px;
-  color: #f87171;
-  line-height: 1.65;
-}
-.setup-box strong { display: block; margin-bottom: 4px; font-size: 14px; }
+.report-overlay { position: fixed; inset: 0; background: #fff; z-index: 200; overflow-y: auto; font-family: 'DM Sans', Helvetica, Arial, sans-serif; color: #2B2A28; }
+.report-header { background: #FF4802; padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; }
+.report-logo { font-family: 'Barlow Condensed', sans-serif; font-size: 26px; font-weight: 700; letter-spacing: 2px; color: #fff; text-transform: uppercase; }
+.report-logo-sub { font-size: 11px; color: rgba(255,255,255,0.75); letter-spacing: 2px; text-transform: uppercase; }
+.report-close { background: rgba(255,255,255,0.2); border: none; color: #fff; font-size: 20px; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.report-body { padding: 24px; }
+.report-stats { display: flex; gap: 16px; margin-bottom: 24px; }
+.stat-box { flex: 1; background: #f5f3f0; border-radius: 8px; padding: 14px; text-align: center; }
+.stat-num { font-size: 28px; font-weight: 700; color: #FF4802; }
+.stat-lbl { font-size: 11px; color: #5F5B55; text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; }
+.report-section-title { font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #5F5B55; margin: 20px 0 10px; padding-bottom: 6px; border-bottom: 1px solid #BCB7B3; }
+.report-task { background: #f9f7f5; border-radius: 8px; padding: 12px 14px; margin-bottom: 8px; border-left: 3px solid #BCB7B3; }
+.report-task.rh { border-left-color: #EF4444; }
+.report-task.rm { border-left-color: #F59E0B; }
+.report-task.rl { border-left-color: #22C55E; }
+.report-task-title { font-weight: 600; font-size: 14px; }
+.report-task-meta { font-size: 12px; color: #5F5B55; margin-top: 4px; }
+.report-print { display: block; width: 100%; margin: 28px 0 8px; background: #FF4802; color: #fff; border: none; border-radius: 8px; padding: 16px; font-size: 16px; font-weight: 700; cursor: pointer; font-family: 'DM Sans', sans-serif; letter-spacing: 0.3px; }
+@media print { .report-close, .report-print { display: none !important; } .report-overlay { position: static; } }
 
-/* ─── TOAST ─── */
-.toast {
-  position: fixed;
-  bottom: 86px; left: 50%;
-  transform: translateX(-50%);
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  color: var(--text);
-  padding: 11px 20px;
-  border-radius: 8px;
-  font-size: 14px; font-weight: 500;
-  z-index: 300;
-  white-space: nowrap;
-  box-shadow: 0 6px 24px rgba(0,0,0,0.45);
-  animation: tIn 0.2s ease;
-  pointer-events: none;
-}
-@keyframes tIn {
-  from { opacity: 0; transform: translateX(-50%) translateY(8px); }
-  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
-}
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.88); z-index: 300; display: flex; align-items: center; justify-content: center; padding: 20px; }
+.modal-img { max-width: 100%; max-height: 80vh; border-radius: 8px; }
+.modal-close { position: absolute; top: 16px; right: 16px; background: rgba(255,255,255,0.15); border: none; color: #fff; font-size: 24px; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; }
 </style>
 </head>
 <body>
 <div id="app"></div>
-
 <script>
-// ╔══════════════════════════════════════════════════════════╗
-// ║  ⚙️  CONFIGURATION — Edit these after Supabase setup     ║
-// ╚══════════════════════════════════════════════════════════╝
 const CFG = {
   SUPABASE_URL:  'https://hyfkgwseyxfjolkmhrag.supabase.co',
   SUPABASE_KEY:  'sb_publishable_ypUCBG5M6gYdkfC9XCqhGg__lPj3D_V',
-  USER_PIN:      '88888',   // PIN for contractors (view + mark complete)
-  ADMIN_PIN:     '197486',  // PIN for Stephen (full admin access)
+  USER_PIN:      '88888',
+  ADMIN_PIN:     '197486',
 };
 
-// ╔══════════════════════════════════════════════════════════╗
-// ║  TRANSLATIONS (Latin American Spanish)                   ║
-// ╚══════════════════════════════════════════════════════════╝
 const TR = {
   en: {
-    appName:'EVOQUE TASKS', co:'Evoque Group', sub:'Task Manager',
-    selLang:'Select Language', eng:'English', spa:'Español',
-    pinTitle:'EVOQUE TASKS', pinHint:'Enter your PIN to access tasks',
-    pinErr:'Incorrect PIN. Please try again.',
-    tasks:'Tasks', archive:'Task History', add:'+ Add Task',
+    appName:'CULTURESPACE TASKS', co:'CultureSpace', sub:'Task Manager',
+    chooseLanguage:'Choose your language',
+    enterPin:'Enter PIN', pinHint:'Enter your contractor or admin PIN',
+    wrongPin:'Incorrect PIN — try again',
+    loading:'Loading tasks…', noOpen:'All clear — no open tasks', noArchive:'No archived tasks yet',
     all:'All', high:'High', medium:'Medium', low:'Low',
-    openSec:'OPEN TASKS', doneSec:'COMPLETED TODAY',
-    noOpen:'No open tasks right now. Great work! 🎉',
-    noDoneToday:'No tasks completed today.',
-    noArchive:'No past completed tasks found.',
-    complete:'✓ Mark Complete', reopen:'↩ Reopen',
-    edit:'Edit', del:'Delete',
-    assignedTo:'Assigned to', created:'Created', completedAt:'Completed',
-    unassigned:'Unassigned', noDesc:'No description.',
+    open:'Open', completed:'Completed', completedAt:'Done', doneSec:'Completed today',
+    complete:'Mark Done', reopen:'Reopen', edit:'Edit', del:'Delete', unassigned:'Unassigned',
+    archive:'Archive', admin:'Admin', logout:'Sign out',
     formNew:'New Task', formEdit:'Edit Task',
-    fTitle:'Task Title *', fDesc:'Description', fPri:'Priority', fAssign:'Assign To',
-    save:'SAVE TASK', cancel:'Cancel',
-    delConfirm:'Delete this task permanently?',
-    admin:'Admin', logout:'Sign Out',
-    titleReq:'Task title is required.',
-    tDone:'Task marked complete ✓', tOpen:'Task reopened', tSaved:'Task saved!', tUpdated:'Task updated!',
-    loading:'Loading tasks...',
-    priLabel:'Priority:',
-    setupTitle:'⚠️ Setup Required',
-    setupMsg:'Add your Supabase URL and API key in the CONFIG section at the top of index.html. See the setup instructions included with this file.',
+    fTitle:'Task title *', fDesc:'Description', fPri:'Priority',
+    fAssign:'Assigned to', fProjNum:'Project #', fPM:'Project Manager', fDue:'Due date',
+    fFiles:'Attachments (photos, PDFs, videos)', fChecklist:'Checklist',
+    addChecklistItem:'+ Add checklist item', save:'Save Task', cancel:'Cancel', saving:'Saving…',
+    deleteConfirm:'Delete this task?', report:'Task Report', reportPrint:'Print / Save PDF',
+    reportOpen:'Open Tasks', reportDone:'Completed Today', noTasks:'No tasks',
   },
   es: {
-    appName:'EVOQUE TAREAS', co:'Evoque Group', sub:'Gestor de Tareas',
-    selLang:'Seleccione Idioma', eng:'English', spa:'Español',
-    pinTitle:'EVOQUE TAREAS', pinHint:'Ingrese su PIN para acceder a las tareas',
-    pinErr:'PIN incorrecto. Por favor intente de nuevo.',
-    tasks:'Tareas', archive:'Historial de Tareas', add:'+ Agregar Tarea',
-    all:'Todas', high:'Alta', medium:'Media', low:'Baja',
-    openSec:'TAREAS ABIERTAS', doneSec:'COMPLETADAS HOY',
-    noOpen:'No hay tareas abiertas. ¡Buen trabajo! 🎉',
-    noDoneToday:'No hay tareas completadas hoy.',
-    noArchive:'No se encontraron tareas completadas anteriores.',
-    complete:'✓ Marcar Completa', reopen:'↩ Reabrir',
-    edit:'Editar', del:'Eliminar',
-    assignedTo:'Asignado a', created:'Creado', completedAt:'Completado',
-    unassigned:'Sin asignar', noDesc:'Sin descripción.',
+    appName:'CULTURESPACE TAREAS', co:'CultureSpace', sub:'Gestor de Tareas',
+    chooseLanguage:'Elige tu idioma',
+    enterPin:'Ingresa PIN', pinHint:'Ingresa tu PIN de contratista o administrador',
+    wrongPin:'PIN incorrecto — intenta de nuevo',
+    loading:'Cargando tareas…', noOpen:'Todo listo — sin tareas abiertas', noArchive:'Sin tareas archivadas aún',
+    all:'Todos', high:'Alta', medium:'Media', low:'Baja',
+    open:'Abiertas', completed:'Completadas', completedAt:'Hecho', doneSec:'Completadas hoy',
+    complete:'Marcar listo', reopen:'Reabrir', edit:'Editar', del:'Eliminar', unassigned:'Sin asignar',
+    archive:'Archivo', admin:'Admin', logout:'Salir',
     formNew:'Nueva Tarea', formEdit:'Editar Tarea',
-    fTitle:'Título de la Tarea *', fDesc:'Descripción', fPri:'Prioridad', fAssign:'Asignar A',
-    save:'GUARDAR TAREA', cancel:'Cancelar',
-    delConfirm:'¿Eliminar esta tarea permanentemente?',
-    admin:'Admin', logout:'Salir',
-    titleReq:'El título de la tarea es requerido.',
-    tDone:'Tarea marcada completa ✓', tOpen:'Tarea reabierta', tSaved:'¡Tarea guardada!', tUpdated:'¡Tarea actualizada!',
-    loading:'Cargando tareas...',
-    priLabel:'Prioridad:',
-    setupTitle:'⚠️ Configuración Requerida',
-    setupMsg:'Agregue su URL de Supabase y clave API en la sección CONFIG al inicio de index.html. Consulte las instrucciones de configuración incluidas.',
+    fTitle:'Título de tarea *', fDesc:'Descripción', fPri:'Prioridad',
+    fAssign:'Asignado a', fProjNum:'Núm. de proyecto', fPM:'Gerente de proyecto', fDue:'Fecha límite',
+    fFiles:'Archivos adjuntos (fotos, PDFs, videos)', fChecklist:'Lista de verificación',
+    addChecklistItem:'+ Agregar elemento', save:'Guardar tarea', cancel:'Cancelar', saving:'Guardando…',
+    deleteConfirm:'¿Eliminar esta tarea?', report:'Reporte de Tareas', reportPrint:'Imprimir / Guardar PDF',
+    reportOpen:'Tareas Abiertas', reportDone:'Completadas Hoy', noTasks:'Sin tareas',
   }
 };
 
-// ╔══════════════════════════════════════════════════════════╗
-// ║  STATE                                                   ║
-// ╚══════════════════════════════════════════════════════════╝
-let S = {
-  lang:      sessionStorage.getItem('etm_lang') || null,
-  access:    sessionStorage.getItem('etm_access') || null,
-  page:      'language',
-  tasks:     [],
-  filter:    'all',
+const S = {
+  lang:      sessionStorage.getItem('csm_lang') || 'en',
+  page:      'lang',
+  access:    sessionStorage.getItem('csm_access') || null,
+  pins:      [], pinErr: false,
+  tasks:     [], files: {}, checklist: {},
+  loading:   false, filter: 'all',
   editTask:  null,
-  loading:   false,
-  pins:      [],
-  pinErr:    false,
-  toast:     null,
-  toastTmr:  null,
-  form:      { title:'', description:'', priority:'medium', assigned_to:'' },
+  form:      { title:'', description:'', priority:'medium', assigned_to:'', project_number:'', pm:'', due_date:'', checklistItems:[], pendingFiles:[] },
+  showReport: false, lightbox: null,
 };
+if (S.access) S.page = 'tasks';
 
-// Restore session on reload
-if (S.lang && S.access) {
-  S.page = 'tasks';
-} else if (S.lang) {
-  S.page = 'pin';
-}
+const db = supabase.createClient(CFG.SUPABASE_URL, CFG.SUPABASE_KEY);
 
-// ╔══════════════════════════════════════════════════════════╗
-// ║  SUPABASE                                                ║
-// ╚══════════════════════════════════════════════════════════╝
-const isSetup = CFG.SUPABASE_URL !== 'YOUR_SUPABASE_URL';
-let db = null;
-if (isSetup) {
-  db = supabase.createClient(CFG.SUPABASE_URL, CFG.SUPABASE_KEY);
-}
+const T   = k => TR[S.lang][k] || k;
+const esc = s => (s||'').toString().replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const isToday = d => { if (!d) return false; const t=new Date(d),n=new Date(); return t.getFullYear()===n.getFullYear()&&t.getMonth()===n.getMonth()&&t.getDate()===n.getDate(); };
+const fmtDate = d => { if (!d) return ''; return new Date(d).toLocaleDateString(S.lang==='es'?'es-MX':'en-US',{month:'short',day:'numeric'}); };
+const fmtTime = d => { if (!d) return ''; return new Date(d).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}); };
+const toast   = msg => { const el=document.createElement('div'); el.className='toast'; el.textContent=msg; document.body.appendChild(el); setTimeout(()=>el.remove(),2600); };
+const fileIcon = type => { if(type&&type.startsWith('image/'))return'🖼️'; if(type&&type.includes('pdf'))return'📄'; if(type&&type.startsWith('video/'))return'🎥'; return'📎'; };
 
-// ╔══════════════════════════════════════════════════════════╗
-// ║  HELPERS                                                 ║
-// ╚══════════════════════════════════════════════════════════╝
-const T = (k) => (TR[S.lang || 'en'][k] || k);
-const locale = () => S.lang === 'es' ? 'es-MX' : 'en-US';
-
-function isToday(d) {
-  if (!d) return false;
-  const dt = new Date(d), n = new Date();
-  return dt.getFullYear() === n.getFullYear() && dt.getMonth() === n.getMonth() && dt.getDate() === n.getDate();
-}
-
-function fmtDate(d) {
-  if (!d) return '';
-  return new Date(d).toLocaleDateString(locale(), { month:'short', day:'numeric', year:'numeric' });
-}
-
-function fmtTime(d) {
-  if (!d) return '';
-  return new Date(d).toLocaleTimeString(locale(), { hour:'numeric', minute:'2-digit' });
-}
-
-function esc(s) {
-  if (!s) return '';
-  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
-
-function toast(msg) {
-  clearTimeout(S.toastTmr);
-  S.toast = msg;
-  renderToast();
-  S.toastTmr = setTimeout(() => { S.toast = null; renderToast(); }, 2600);
-}
-
-function renderToast() {
-  let t = document.getElementById('toast-el');
-  if (S.toast) {
-    if (!t) { t = document.createElement('div'); t.id = 'toast-el'; t.className = 'toast'; document.body.appendChild(t); }
-    t.textContent = S.toast;
-  } else {
-    if (t) t.remove();
-  }
-}
-
-// ╔══════════════════════════════════════════════════════════╗
-// ║  DATA LAYER                                              ║
-// ╚══════════════════════════════════════════════════════════╝
 async function loadTasks() {
-  if (!db) return;
-  S.loading = true; render();
-  const { data, error } = await db.from('tasks').select('*').order('created_at', { ascending:false });
-  S.loading = false;
-  if (!error && data) S.tasks = data;
-  render();
+  S.loading=true; render();
+  try {
+    const {data,error}=await db.from('tasks').select('*').order('created_at',{ascending:false});
+    if(error)throw error;
+    S.tasks=data||[];
+    await loadFilesAndChecklists();
+  } catch(e){ toast('Error: '+e.message); }
+  S.loading=false; render();
+}
+
+async function loadFilesAndChecklists() {
+  try {
+    const ids=S.tasks.map(t=>t.id); if(!ids.length)return;
+    const [{data:fData},{data:cData}]=await Promise.all([
+      db.from('task_files').select('*').in('task_id',ids),
+      db.from('task_checklist').select('*').in('task_id',ids).order('position',{ascending:true}),
+    ]);
+    S.files={};
+    (fData||[]).forEach(f=>{ if(!S.files[f.task_id])S.files[f.task_id]=[]; S.files[f.task_id].push(f); });
+    S.checklist={};
+    (cData||[]).forEach(c=>{ if(!S.checklist[c.task_id])S.checklist[c.task_id]=[]; S.checklist[c.task_id].push(c); });
+  } catch(e){ console.warn('loadFilesAndChecklists:',e.message); }
 }
 
 async function saveTask() {
-  if (!db) { toast('⚠️ Database not configured.'); return; }
-  const f = S.form;
-  if (!f.title.trim()) { alert(T('titleReq')); return; }
-  const payload = {
-    title:       f.title.trim(),
-    description: f.description.trim(),
-    priority:    f.priority,
-    assigned_to: f.assigned_to.trim() || null,
-  };
-  if (S.editTask) {
-    await db.from('tasks').update(payload).eq('id', S.editTask.id);
-    toast(T('tUpdated'));
-  } else {
-    await db.from('tasks').insert([{ ...payload, status:'open' }]);
-    toast(T('tSaved'));
-  }
-  S.editTask = null;
-  S.form = { title:'', description:'', priority:'medium', assigned_to:'' };
-  S.page = 'tasks';
-  await loadTasks();
+  const btn=document.querySelector('[data-act="save"]');
+  if(btn){btn.textContent=T('saving');btn.disabled=true;}
+  const f=S.form;
+  if(!f.title.trim()){toast(T('fTitle'));if(btn){btn.textContent=T('save');btn.disabled=false;}return;}
+  try {
+    let descFinal=f.description;
+    if(S.lang==='es'&&f.description.trim()){
+      try{
+        const r=await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(f.description)}&langpair=es|en`);
+        const j=await r.json(); if(j.responseStatus===200)descFinal=j.responseData.translatedText;
+      }catch(_){}
+    }
+    const payload={ title:f.title.trim(), description:descFinal, priority:f.priority, assigned_to:f.assigned_to.trim()||null, project_number:f.project_number.trim()||null, pm:f.pm.trim()||null, due_date:f.due_date||null };
+    let taskId;
+    if(S.editTask){
+      const{error}=await db.from('tasks').update(payload).eq('id',S.editTask.id); if(error)throw error; taskId=S.editTask.id;
+    } else {
+      const{data,error}=await db.from('tasks').insert([{...payload,status:'open'}]).select().single(); if(error)throw error; taskId=data.id;
+    }
+    if(f.pendingFiles&&f.pendingFiles.length){
+      for(const pf of f.pendingFiles){
+        const ext=pf.file.name.split('.').pop();
+        const path=`${taskId}/${Date.now()}_${Math.random().toString(36).slice(2)}.${ext}`;
+        const{error:upErr}=await db.storage.from('task-files').upload(path,pf.file);
+        if(!upErr){
+          const{data:urlData}=db.storage.from('task-files').getPublicUrl(path);
+          await db.from('task_files').insert([{task_id:taskId,name:pf.file.name,url:urlData.publicUrl,type:pf.file.type,path}]);
+        }
+      }
+    }
+    if(f.checklistItems&&f.checklistItems.length){
+      if(S.editTask)await db.from('task_checklist').delete().eq('task_id',taskId);
+      const rows=f.checklistItems.filter(ci=>ci.text.trim()).map((ci,i)=>({task_id:taskId,text:ci.text.trim(),done:false,position:i}));
+      if(rows.length)await db.from('task_checklist').insert(rows);
+    } else if(S.editTask){
+      await db.from('task_checklist').delete().eq('task_id',taskId);
+    }
+    S.editTask=null;
+    S.form={title:'',description:'',priority:'medium',assigned_to:'',project_number:'',pm:'',due_date:'',checklistItems:[],pendingFiles:[]};
+    S.page='tasks'; await loadTasks();
+  } catch(e){ toast('Save error: '+e.message); if(btn){btn.textContent=T('save');btn.disabled=false;} }
 }
 
-async function completeTask(id) {
-  if (!db) return;
-  await db.from('tasks').update({ status:'completed', completed_at: new Date().toISOString() }).eq('id', id);
-  toast(T('tDone'));
-  await loadTasks();
+async function completeTask(id){
+  const{error}=await db.from('tasks').update({status:'completed',completed_at:new Date().toISOString()}).eq('id',id);
+  if(error){toast(error.message);return;}
+  S.tasks=S.tasks.map(t=>t.id===id?{...t,status:'completed',completed_at:new Date().toISOString()}:t); render();
 }
-
-async function reopenTask(id) {
-  if (!db) return;
-  await db.from('tasks').update({ status:'open', completed_at: null }).eq('id', id);
-  toast(T('tOpen'));
-  await loadTasks();
+async function reopenTask(id){
+  const{error}=await db.from('tasks').update({status:'open',completed_at:null}).eq('id',id);
+  if(error){toast(error.message);return;}
+  S.tasks=S.tasks.map(t=>t.id===id?{...t,status:'open',completed_at:null}:t); render();
 }
-
-async function delTask(id) {
-  if (!db) return;
-  if (!confirm(T('delConfirm'))) return;
-  await db.from('tasks').delete().eq('id', id);
-  await loadTasks();
+async function delTask(id){
+  if(!confirm(T('deleteConfirm')))return;
+  const taskFiles=S.files[id]||[];
+  for(const f of taskFiles){if(f.path)await db.storage.from('task-files').remove([f.path]);}
+  await db.from('task_files').delete().eq('task_id',id);
+  await db.from('task_checklist').delete().eq('task_id',id);
+  const{error}=await db.from('tasks').delete().eq('id',id);
+  if(error){toast(error.message);return;}
+  S.tasks=S.tasks.filter(t=>t.id!==id); delete S.files[id]; delete S.checklist[id]; render();
 }
-
-async function setPriority(id, priority) {
-  if (!db) return;
-  await db.from('tasks').update({ priority }).eq('id', id);
-  S.tasks = S.tasks.map(t => t.id === id ? { ...t, priority } : t);
+async function setPriority(id,priority){
+  const{error}=await db.from('tasks').update({priority}).eq('id',id);
+  if(error){toast(error.message);return;}
+  S.tasks=S.tasks.map(t=>t.id===id?{...t,priority}:t); render();
+}
+async function toggleChecklistItem(taskId,itemId,done){
+  await db.from('task_checklist').update({done}).eq('id',itemId);
+  if(S.checklist[taskId])S.checklist[taskId]=S.checklist[taskId].map(c=>c.id===itemId?{...c,done}:c);
   render();
 }
 
-// ╔══════════════════════════════════════════════════════════╗
-// ║  RENDER                                                  ║
-// ╚══════════════════════════════════════════════════════════╝
-function render() {
-  const app = document.getElementById('app');
-  const pages = {
-    language: renderLang,
-    pin:      renderPin,
-    tasks:    renderTasks,
-    archive:  renderArchive,
-    form:     renderFormPage,
-  };
-  app.innerHTML = (pages[S.page] || renderLang)();
+function render(){
+  const app=document.getElementById('app');
+  if(S.lightbox){
+    app.innerHTML=`<div class="modal-overlay" data-act="close-lightbox"><button class="modal-close" data-act="close-lightbox">✕</button><img class="modal-img" src="${esc(S.lightbox)}" alt=""></div>`;
+    bindEvents(); return;
+  }
+  if(S.showReport){app.innerHTML=renderReport();bindEvents();return;}
+  if(S.page==='lang')    app.innerHTML=renderLang();
+  else if(S.page==='pin')     app.innerHTML=renderPin();
+  else if(S.page==='tasks')   app.innerHTML=renderTasks();
+  else if(S.page==='archive') app.innerHTML=renderArchive();
+  else if(S.page==='form')    app.innerHTML=renderFormPage();
   bindEvents();
 }
 
-// — Language
-function renderLang() {
-  return `<div class="screen lang-screen">
+function renderLang(){
+  return`<div class="screen lang-screen">
     <div class="logo-block">
-      <div class="logo-name">${TR.en.co}</div>
-      <div class="logo-sub">${TR.en.sub}</div>
+      <div class="logo-name">CultureSpace</div>
+      <div class="logo-sub">The Art of the Workspace</div>
       <div class="logo-bar"></div>
     </div>
-    <div class="lang-prompt">${TR.en.selLang} / ${TR.es.selLang}</div>
+    <div class="lang-prompt">${T('chooseLanguage')}</div>
     <div class="lang-btns">
-      <button class="lang-btn" data-act="lang" data-v="en">🇺🇸 ${TR.en.eng}</button>
-      <button class="lang-btn" data-act="lang" data-v="es">🇲🇽 ${TR.es.spa}</button>
+      <button class="lang-btn" data-act="lang" data-v="en">🇺🇸 &nbsp;English</button>
+      <button class="lang-btn" data-act="lang" data-v="es">🇲🇽 &nbsp;Español</button>
     </div>
   </div>`;
 }
 
-// — PIN
-function renderPin() {
-  const dots = [0,1,2,3].map(i =>
-    `<div class="pin-dot${i < S.pins.length ? ' filled' : ''}"></div>`
-  ).join('');
-  return `<div class="screen pin-screen">
-    <div class="pin-header">
-      <div class="pin-title">${T('pinTitle')}</div>
-      <div class="pin-hint">${T('pinHint')}</div>
-    </div>
+function renderPin(){
+  const maxLen=Math.max(CFG.USER_PIN.length,CFG.ADMIN_PIN.length);
+  const dots=Array.from({length:maxLen},(_,i)=>`<div class="pin-dot${i<S.pins.length?' filled':''}"></div>`).join('');
+  return`<div class="screen pin-screen">
+    <div class="pin-header"><div class="pin-title">${T('enterPin')}</div><div class="pin-hint">${T('pinHint')}</div></div>
     <div class="pin-dots">${dots}</div>
-    <div class="pin-err">${S.pinErr ? T('pinErr') : '&nbsp;'}</div>
+    <div class="pin-err">${S.pinErr?T('wrongPin'):''}</div>
     <div class="keypad">
-      ${[1,2,3,4,5,6,7,8,9].map(n =>
-        `<button class="key" data-act="digit" data-v="${n}">${n}</button>`
-      ).join('')}
-      <div class="key empty"></div>
+      ${[1,2,3,4,5,6,7,8,9].map(n=>`<button class="key" data-act="digit" data-v="${n}">${n}</button>`).join('')}
+      <button class="key empty"></button>
       <button class="key" data-act="digit" data-v="0">0</button>
-      <button class="key del" data-act="del">⌫</button>
+      <button class="key del" data-act="pin-del">⌫</button>
     </div>
   </div>`;
 }
 
-// — Tasks
-function renderTasks() {
-  const openAll    = S.tasks.filter(t => t.status === 'open');
-  const doneToday  = S.tasks.filter(t => t.status === 'completed' && isToday(t.completed_at));
-  const openFilt   = S.filter === 'all' ? openAll : openAll.filter(t => t.priority === S.filter);
-
-  const filterMap  = { all:T('all'), high:T('high'), medium:T('medium'), low:T('low') };
-  const filterHtml = Object.entries(filterMap).map(([k,label]) => {
-    const cls = S.filter === k ? `pill p-${k === 'medium' ? 'medium' : k}` : 'pill';
-    return `<button class="${cls}" data-act="filter" data-v="${k}">${label}</button>`;
-  }).join('');
-
-  let body = '';
-
-  if (!isSetup) {
-    body += `<div class="setup-box"><strong>${T('setupTitle')}</strong>${T('setupMsg')}</div>`;
-  }
-
-  body += `<div class="filter-bar">${filterHtml}</div>`;
-  body += `<div class="sec-label">${T('openSec')} <span class="sec-count">${openFilt.length}</span></div>`;
-
-  if (S.loading) {
-    body += `<div class="loading"><span class="spinner"></span>${T('loading')}</div>`;
-  } else if (openFilt.length === 0) {
-    body += `<div class="empty"><div class="empty-icon">✅</div><div class="empty-txt">${T('noOpen')}</div></div>`;
-  } else {
-    body += openFilt.map(t => card(t)).join('');
-  }
-
-  if (doneToday.length > 0) {
-    body += `<div class="sec-label">${T('doneSec')} <span class="sec-count">${doneToday.length}</span></div>`;
-    body += doneToday.map(t => card(t)).join('');
-  }
-
-  const adminBit = S.access === 'admin' ? `<span class="admin-chip">${T('admin')}</span>` : '';
-  const fab      = S.access === 'admin' ? `<button class="fab" data-act="add">+</button>` : '';
-
-  return `<div class="screen">
+function renderTasks(){
+  const open=S.tasks.filter(t=>t.status==='open');
+  const doneToday=S.tasks.filter(t=>t.status==='completed'&&isToday(t.completed_at));
+  const filtered=S.filter==='all'?open:open.filter(t=>t.priority===S.filter);
+  let body='';
+  if(S.loading) body=`<div class="loading"><span class="spinner"></span>${T('loading')}</div>`;
+  else if(filtered.length===0) body=`<div class="empty"><div class="empty-icon">✅</div><div class="empty-txt">${T('noOpen')}</div></div>`;
+  else body=filtered.map(t=>card(t)).join('');
+  if(doneToday.length>0){body+=`<div class="sec-label">${T('doneSec')} <span class="sec-count">${doneToday.length}</span></div>`;body+=doneToday.map(t=>card(t)).join('');}
+  const adminBit=S.access==='admin'?`<span class="admin-chip">${T('admin')}</span>`:'';
+  const fab=S.access==='admin'?`<button class="fab" data-act="add">+</button>`:'';
+  const reportBtn=S.access==='admin'?`<button class="icon-btn" data-act="report" title="${T('report')}">📊</button>`:'';
+  return`<div class="screen">
     <div class="app-header">
-      <div class="h-left">
-        <div class="h-title">${T('appName')}</div>${adminBit}
-      </div>
-      <div class="h-right">
-        <button class="icon-btn" data-act="goto-archive" title="${T('archive')}">📋</button>
-        <button class="lang-pill" data-act="toggle-lang">${S.lang === 'es' ? 'EN' : 'ES'}</button>
-        <button class="icon-btn" data-act="logout" title="${T('logout')}">⏻</button>
-      </div>
+      <div class="h-left"><div class="h-title">${T('appName')}</div>${adminBit}</div>
+      <div class="h-right">${reportBtn}<button class="icon-btn" data-act="goto-archive" title="${T('archive')}">📋</button><button class="lang-pill" data-act="toggle-lang">${S.lang==='es'?'EN':'ES'}</button><button class="icon-btn" data-act="logout" title="${T('logout')}">⏻</button></div>
     </div>
-    <div class="content">${body}</div>
+    <div class="content">
+      <div class="filter-bar">
+        <button class="pill${S.filter==='all'?' active':''}" data-act="filter" data-v="all">${T('all')}</button>
+        <button class="pill${S.filter==='high'?' active':''}" data-act="filter" data-v="high">🔴 ${T('high')}</button>
+        <button class="pill${S.filter==='medium'?' active':''}" data-act="filter" data-v="medium">🟡 ${T('medium')}</button>
+        <button class="pill${S.filter==='low'?' active':''}" data-act="filter" data-v="low">🟢 ${T('low')}</button>
+      </div>
+      ${body}
+    </div>
     ${fab}
   </div>`;
 }
 
-// — Archive
-function renderArchive() {
-  const past = S.tasks
-    .filter(t => t.status === 'completed' && !isToday(t.completed_at))
-    .sort((a,b) => new Date(b.completed_at) - new Date(a.completed_at));
-
-  const body = past.length === 0
-    ? `<div class="empty"><div class="empty-icon">📭</div><div class="empty-txt">${T('noArchive')}</div></div>`
-    : past.map(t => card(t)).join('');
-
-  return `<div class="screen">
+function renderArchive(){
+  const past=S.tasks.filter(t=>t.status==='completed'&&!isToday(t.completed_at)).sort((a,b)=>new Date(b.completed_at)-new Date(a.completed_at));
+  const body=past.length===0?`<div class="empty"><div class="empty-icon">📭</div><div class="empty-txt">${T('noArchive')}</div></div>`:past.map(t=>card(t)).join('');
+  return`<div class="screen">
     <div class="app-header">
-      <div class="h-left">
-        <button class="h-back" data-act="back">&#8592;</button>
-        <div class="h-title">${T('archive')}</div>
-      </div>
-      <div class="h-right">
-        <button class="lang-pill" data-act="toggle-lang">${S.lang === 'es' ? 'EN' : 'ES'}</button>
-      </div>
+      <div class="h-left"><button class="h-back" data-act="back">&#8592;</button><div class="h-title">${T('archive')}</div></div>
+      <div class="h-right"><button class="lang-pill" data-act="toggle-lang">${S.lang==='es'?'EN':'ES'}</button></div>
     </div>
     <div class="content">${body}</div>
   </div>`;
 }
 
-// — Form
-function renderFormPage() {
-  const f     = S.form;
-  const isEdit= !!S.editTask;
-  const pOpts = ['high','medium','low'].map(p =>
-    `<option value="${p}" ${f.priority === p ? 'selected' : ''}>${T(p)}</option>`
-  ).join('');
-
-  return `<div class="screen">
+function renderFormPage(){
+  const f=S.form, isEdit=!!S.editTask;
+  const pOpts=['high','medium','low'].map(p=>`<option value="${p}" ${f.priority===p?'selected':''}>${T(p)}</option>`).join('');
+  let filePreview='';
+  if(f.pendingFiles&&f.pendingFiles.length){
+    filePreview=`<div class="file-preview-list">`+f.pendingFiles.map((pf,i)=>{
+      if(pf.preview&&pf.file.type.startsWith('image/'))return`<div class="file-preview-item"><img src="${pf.preview}" alt="${esc(pf.file.name)}"><button class="file-remove" data-act="remove-file" data-i="${i}">✕</button></div>`;
+      return`<div class="file-preview-item"><div class="file-icon">${fileIcon(pf.file.type)}<span>${esc(pf.file.name.slice(0,8))}</span></div><button class="file-remove" data-act="remove-file" data-i="${i}">✕</button></div>`;
+    }).join('')+`</div>`;
+  }
+  let existingFiles='';
+  if(isEdit&&S.files[S.editTask.id]&&S.files[S.editTask.id].length){
+    existingFiles=`<div class="file-preview-list">`+S.files[S.editTask.id].map(f=>{
+      if(f.type&&f.type.startsWith('image/'))return`<div class="file-preview-item"><img src="${esc(f.url)}" alt="${esc(f.name)}"></div>`;
+      return`<div class="file-preview-item"><div class="file-icon">${fileIcon(f.type)}<span>${esc(f.name.slice(0,8))}</span></div></div>`;
+    }).join('')+`</div>`;
+  }
+  const clItems=(f.checklistItems||[]).map((ci,i)=>`<div class="checklist-builder-item"><span>☐</span><input type="text" class="cl-item-input" data-i="${i}" value="${esc(ci.text)}" placeholder="Step ${i+1}…"><button class="checklist-item-remove" data-act="remove-cl" data-i="${i}">✕</button></div>`).join('');
+  return`<div class="screen">
     <div class="app-header">
-      <div class="h-left">
-        <button class="h-back" data-act="back">&#8592;</button>
-        <div class="h-title">${isEdit ? T('formEdit') : T('formNew')}</div>
-      </div>
+      <div class="h-left"><button class="h-back" data-act="back">&#8592;</button><div class="h-title">${isEdit?T('formEdit'):T('formNew')}</div></div>
     </div>
     <div class="form-wrap">
+      <div class="f-group"><label class="f-label">${T('fTitle')}</label><input class="f-input" id="fi-title" type="text" value="${esc(f.title)}" placeholder="${T('fTitle')}"></div>
+      <div class="f-group"><label class="f-label">${T('fDesc')}</label><textarea class="f-textarea" id="fi-desc" placeholder="${T('fDesc')}">${esc(f.description)}</textarea></div>
+      <div class="f-group"><label class="f-label">${T('fPri')}</label><select class="f-select" id="fi-pri">${pOpts}</select></div>
+      <div class="f-group"><label class="f-label">${T('fAssign')}</label><input class="f-input" id="fi-assign" type="text" value="${esc(f.assigned_to)}" placeholder="${T('unassigned')}"></div>
+      <div class="f-row">
+        <div class="f-group"><label class="f-label">${T('fProjNum')}</label><input class="f-input" id="fi-projnum" type="text" value="${esc(f.project_number)}" placeholder="e.g. P-1042"></div>
+        <div class="f-group"><label class="f-label">${T('fPM')}</label><input class="f-input" id="fi-pm" type="text" value="${esc(f.pm)}" placeholder="${T('fPM')}"></div>
+      </div>
+      <div class="f-group"><label class="f-label">${T('fDue')}</label><input class="f-input" id="fi-due" type="date" value="${esc(f.due_date)}"></div>
       <div class="f-group">
-        <label class="f-label">${T('fTitle')}</label>
-        <input class="f-input" id="fi-title" type="text" value="${esc(f.title)}" placeholder="${T('fTitle')}">
+        <label class="f-label">${T('fFiles')}</label>
+        ${existingFiles}
+        <div class="file-upload-area" data-act="pick-files"><div class="file-upload-icon">📎</div><div class="file-upload-txt">Tap to add photos, PDFs, or videos</div></div>
+        <input type="file" class="file-upload-input" id="fi-files" multiple accept="image/*,application/pdf,video/*">
+        ${filePreview}
       </div>
       <div class="f-group">
-        <label class="f-label">${T('fDesc')}</label>
-        <textarea class="f-textarea" id="fi-desc" placeholder="${T('fDesc')}">${esc(f.description)}</textarea>
-      </div>
-      <div class="f-group">
-        <label class="f-label">${T('fPri')}</label>
-        <select class="f-select" id="fi-pri">${pOpts}</select>
-      </div>
-      <div class="f-group">
-        <label class="f-label">${T('fAssign')}</label>
-        <input class="f-input" id="fi-assign" type="text" value="${esc(f.assigned_to)}" placeholder="${T('unassigned')}">
+        <label class="f-label">${T('fChecklist')}</label>
+        <div class="checklist-builder" id="cl-builder">${clItems}</div>
+        <button class="add-checklist-btn" data-act="add-cl">${T('addChecklistItem')}</button>
       </div>
       <div class="f-actions">
         <button class="f-cancel" data-act="back">${T('cancel')}</button>
@@ -890,169 +532,142 @@ function renderFormPage() {
   </div>`;
 }
 
-// — Task Card
-function card(t) {
-  const isDone   = t.status === 'completed';
-  const priClass = { high:'ph', medium:'pm', low:'pl' }[t.priority] || '';
-  const priBadge = { high:`<span class="badge bh">${T('high')}</span>`, medium:`<span class="badge bm">${T('medium')}</span>`, low:`<span class="badge bl">${T('low')}</span>` }[t.priority] || '';
-  const doneBadge= isDone ? `<span class="badge bd">${T('completedAt')}</span>` : '';
+function card(t){
+  const isDone=t.status==='completed';
+  const priClass={high:'ph',medium:'pm',low:'pl'}[t.priority]||'';
+  const priBadge={high:`<span class="badge bh">${T('high')}</span>`,medium:`<span class="badge bm">${T('medium')}</span>`,low:`<span class="badge bl">${T('low')}</span>`}[t.priority]||'';
+  const doneBadge=isDone?`<span class="badge bd">${T('completedAt')}</span>`:'';
+  const assignee=esc(t.assigned_to||T('unassigned'));
+  const created=fmtDate(t.created_at);
+  const doneAt=isDone&&t.completed_at?`<span>✓ ${fmtDate(t.completed_at)} ${fmtTime(t.completed_at)}</span>`:'';
+  let chips='';
+  if(t.project_number)chips+=`<span class="card-chip">🏗 ${esc(t.project_number)}</span>`;
+  if(t.pm)chips+=`<span class="card-chip">👷 ${esc(t.pm)}</span>`;
+  if(t.due_date)chips+=`<span class="card-chip">📅 ${esc(t.due_date)}</span>`;
+  let filesHtml='';
+  const taskFiles=S.files[t.id]||[];
+  if(taskFiles.length){filesHtml=`<div class="card-files">`+taskFiles.map(f=>{if(f.type&&f.type.startsWith('image/'))return`<img class="file-thumb" src="${esc(f.url)}" alt="${esc(f.name)}" data-act="lightbox" data-url="${esc(f.url)}">`;return`<a class="file-link" href="${esc(f.url)}" target="_blank">${fileIcon(f.type)} ${esc(f.name)}</a>`;}).join('')+`</div>`;}
+  let checklistHtml='';
+  const items=S.checklist[t.id]||[];
+  if(items.length){const done=items.filter(c=>c.done).length;checklistHtml=`<div class="card-checklist"><div class="checklist-progress">${done}/${items.length} complete</div>${items.map(c=>`<div class="checklist-item${c.done?' checked':''}"><input type="checkbox" ${c.done?'checked':''} data-act="check-item" data-tid="${t.id}" data-cid="${c.id}" data-done="${c.done?'1':'0'}"><span>${esc(c.text)}</span></div>`).join('')}</div>`;}
+  const priSel=(S.access==='admin'&&!isDone)?`<select class="pri-select" data-act="priority" data-id="${t.id}"><option value="high" ${t.priority==='high'?'selected':''}>${T('high')}</option><option value="medium" ${t.priority==='medium'?'selected':''}>${T('medium')}</option><option value="low" ${t.priority==='low'?'selected':''}>${T('low')}</option></select>`:'';
+  let actions='';
+  if(!isDone)actions+=`<button class="btn btn-done" data-act="complete" data-id="${t.id}">${T('complete')}</button>`;
+  else actions+=`<button class="btn btn-open" data-act="reopen" data-id="${t.id}">${T('reopen')}</button>`;
+  if(S.access==='admin'&&!isDone){actions+=`<button class="btn btn-edit" data-act="edit" data-id="${t.id}">${T('edit')}</button>`;actions+=`<button class="btn btn-del" data-act="task-del" data-id="${t.id}">${T('del')}</button>`;}
+  return`<div class="card ${priClass}${isDone?' done':''}">
+    <div class="card-top"><div class="card-title">${esc(t.title)}</div><div class="card-badges">${priBadge}${doneBadge}</div></div>
+    ${t.description?`<div class="card-desc">${esc(t.description)}</div>`:''}
+    ${chips?`<div class="card-chips">${chips}</div>`:''}
+    ${filesHtml}${checklistHtml}
+    <div class="card-meta"><span>👤 ${assignee}</span><span>📅 ${created}</span>${doneAt}</div>
+    <div class="card-actions">${priSel}${actions}</div>
+  </div>`;
+}
 
-  const assignee = esc(t.assigned_to || T('unassigned'));
-  const created  = fmtDate(t.created_at);
-  const doneAt   = isDone && t.completed_at ? `<span>✓ ${fmtDate(t.completed_at)} ${fmtTime(t.completed_at)}</span>` : '';
-
-  // Priority selector — admin only, open tasks only
-  const priSel = (S.access === 'admin' && !isDone)
-    ? `<select class="pri-select" data-act="priority" data-id="${t.id}">
-        <option value="high"   ${t.priority==='high'   ? 'selected':''}>${T('high')}</option>
-        <option value="medium" ${t.priority==='medium' ? 'selected':''}>${T('medium')}</option>
-        <option value="low"    ${t.priority==='low'    ? 'selected':''}>${T('low')}</option>
-       </select>` : '';
-
-  // Action buttons
-  let actions = '';
-  if (!isDone) {
-    actions += `<button class="btn btn-done" data-act="complete" data-id="${t.id}">${T('complete')}</button>`;
-  } else {
-    actions += `<button class="btn btn-open" data-act="reopen" data-id="${t.id}">${T('reopen')}</button>`;
-  }
-  if (S.access === 'admin' && !isDone) {
-    actions += `<button class="btn btn-edit" data-act="edit" data-id="${t.id}">${T('edit')}</button>`;
-    actions += `<button class="btn btn-del"  data-act="del"  data-id="${t.id}">${T('del')}</button>`;
-  }
-
-  return `<div class="card ${priClass}${isDone ? ' done' : ''}">
-    <div class="card-top">
-      <div class="card-title">${esc(t.title)}</div>
-      <div class="card-badges">${priBadge}${doneBadge}</div>
-    </div>
-    ${t.description ? `<div class="card-desc">${esc(t.description)}</div>` : ''}
-    <div class="card-meta">
-      <span>👤 ${assignee}</span>
-      <span>📅 ${created}</span>
-      ${doneAt}
-    </div>
-    <div class="card-actions">
-      ${priSel}
-      ${actions}
+function renderReport(){
+  const open=S.tasks.filter(t=>t.status==='open');
+  const done=S.tasks.filter(t=>t.status==='completed'&&isToday(t.completed_at));
+  const sorted=[...open].sort((a,b)=>({high:0,medium:1,low:2}[a.priority]||1)-({high:0,medium:1,low:2}[b.priority]||1));
+  const rt=t=>{const cls={high:'rh',medium:'rm',low:'rl'}[t.priority]||'';const chips=[t.project_number?`#${t.project_number}`:'',t.pm?`PM: ${t.pm}`:'',t.due_date?`Due: ${t.due_date}`:''].filter(Boolean).join(' · ');const clItems=S.checklist[t.id]||[];const clProg=clItems.length?`${clItems.filter(c=>c.done).length}/${clItems.length} items`:'';return`<div class="report-task ${cls}"><div class="report-task-title">${esc(t.title)}</div><div class="report-task-meta">${[esc(t.assigned_to||'Unassigned'),chips,clProg].filter(Boolean).join(' · ')}</div></div>`;};
+  return`<div class="report-overlay">
+    <div class="report-header"><div><div class="report-logo">CultureSpace</div><div class="report-logo-sub">Task Report · ${new Date().toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})}</div></div><button class="report-close" data-act="close-report">✕</button></div>
+    <div class="report-body">
+      <div class="report-stats">
+        <div class="stat-box"><div class="stat-num">${open.length}</div><div class="stat-lbl">Open</div></div>
+        <div class="stat-box"><div class="stat-num">${open.filter(t=>t.priority==='high').length}</div><div class="stat-lbl">High Pri</div></div>
+        <div class="stat-box"><div class="stat-num">${done.length}</div><div class="stat-lbl">Done Today</div></div>
+      </div>
+      <div class="report-section-title">${T('reportOpen')}</div>
+      ${sorted.length?sorted.map(rt).join(''):`<p style="color:#5F5B55;font-size:13px">${T('noTasks')}</p>`}
+      ${done.length?`<div class="report-section-title">${T('reportDone')}</div>${done.map(rt).join('')}`:''}
+      <button class="report-print" data-act="print-report">${T('reportPrint')}</button>
     </div>
   </div>`;
 }
 
-// ╔══════════════════════════════════════════════════════════╗
-// ║  EVENT BINDING                                           ║
-// ╚══════════════════════════════════════════════════════════╝
-function bindEvents() {
-  document.querySelectorAll('[data-act]').forEach(el => {
-    const evt = el.tagName === 'SELECT' ? 'change' : 'click';
-    el.addEventListener(evt, onAction);
+function bindEvents(){
+  document.querySelectorAll('[data-act]').forEach(el=>{
+    const evt=el.tagName==='SELECT'?'change':'click';
+    el.addEventListener(evt,onAction);
+  });
+  const fi=document.getElementById('fi-files');
+  if(fi)fi.addEventListener('change',onFilePicked);
+  document.querySelectorAll('.cl-item-input').forEach(inp=>{
+    inp.addEventListener('input',e=>{const i=parseInt(e.target.dataset.i);S.form.checklistItems[i].text=e.target.value;});
   });
 }
 
-async function onAction(e) {
-  const el  = e.currentTarget;
-  const act = el.dataset.act;
-
-  switch(act) {
-
-    case 'lang':
-      S.lang = el.dataset.v;
-      sessionStorage.setItem('etm_lang', S.lang);
-      S.page = 'pin'; S.pins = []; S.pinErr = false;
-      render(); break;
-
-    case 'toggle-lang':
-      S.lang = S.lang === 'en' ? 'es' : 'en';
-      sessionStorage.setItem('etm_lang', S.lang);
-      render(); break;
-
+async function onAction(e){
+  const el=e.currentTarget, act=el.dataset.act;
+  switch(act){
+    case 'lang': S.lang=el.dataset.v; sessionStorage.setItem('csm_lang',S.lang); S.page='pin'; S.pins=[]; S.pinErr=false; render(); break;
+    case 'toggle-lang': S.lang=S.lang==='en'?'es':'en'; sessionStorage.setItem('csm_lang',S.lang); render(); break;
     case 'digit':
-      if (S.pins.length < 4) {
-        S.pins = [...S.pins, el.dataset.v];
-        S.pinErr = false;
-        render();
-        if (S.pins.length === 4) setTimeout(submitPin, 180);
+      const maxLen=Math.max(CFG.USER_PIN.length,CFG.ADMIN_PIN.length);
+      if(S.pins.length<maxLen){
+        S.pins=[...S.pins,el.dataset.v]; S.pinErr=false; render();
+        const pinStr=S.pins.join('');
+        if(pinStr.length===CFG.USER_PIN.length||pinStr.length===CFG.ADMIN_PIN.length)setTimeout(submitPin,180);
       }
       break;
-
-    case 'del':
-      if (S.pins.length > 0) { S.pins = S.pins.slice(0,-1); S.pinErr = false; render(); }
-      break;
-
-    case 'filter':
-      S.filter = el.dataset.v; render(); break;
-
-    case 'goto-archive':
-      S.page = 'archive'; render(); break;
-
-    case 'back':
-      S.page = 'tasks'; S.editTask = null;
-      S.form = { title:'', description:'', priority:'medium', assigned_to:'' };
-      render(); break;
-
-    case 'add':
-      S.editTask = null;
-      S.form = { title:'', description:'', priority:'medium', assigned_to:'' };
-      S.page = 'form'; render(); break;
-
+    case 'pin-del': if(S.pins.length>0){S.pins=S.pins.slice(0,-1);S.pinErr=false;render();} break;
+    case 'filter': S.filter=el.dataset.v; render(); break;
+    case 'goto-archive': S.page='archive'; render(); break;
+    case 'back': S.page='tasks'; S.editTask=null; S.form={title:'',description:'',priority:'medium',assigned_to:'',project_number:'',pm:'',due_date:'',checklistItems:[],pendingFiles:[]}; render(); break;
+    case 'add': S.editTask=null; S.form={title:'',description:'',priority:'medium',assigned_to:'',project_number:'',pm:'',due_date:'',checklistItems:[],pendingFiles:[]}; S.page='form'; render(); break;
     case 'edit':
-      const te = S.tasks.find(t => t.id === el.dataset.id);
-      if (te) {
-        S.editTask = te;
-        S.form = { title: te.title||'', description: te.description||'', priority: te.priority||'medium', assigned_to: te.assigned_to||'' };
-        S.page = 'form'; render();
-      }
+      const te=S.tasks.find(t=>t.id===el.dataset.id);
+      if(te){S.editTask=te;const existingCl=(S.checklist[te.id]||[]).map(c=>({text:c.text}));S.form={title:te.title||'',description:te.description||'',priority:te.priority||'medium',assigned_to:te.assigned_to||'',project_number:te.project_number||'',pm:te.pm||'',due_date:te.due_date||'',checklistItems:existingCl,pendingFiles:[]};S.page='form';render();}
       break;
-
     case 'save':
-      S.form.title       = document.getElementById('fi-title')?.value || '';
-      S.form.description = document.getElementById('fi-desc')?.value  || '';
-      S.form.priority    = document.getElementById('fi-pri')?.value   || 'medium';
-      S.form.assigned_to = document.getElementById('fi-assign')?.value|| '';
+      S.form.title=document.getElementById('fi-title')?.value||'';
+      S.form.description=document.getElementById('fi-desc')?.value||'';
+      S.form.priority=document.getElementById('fi-pri')?.value||'medium';
+      S.form.assigned_to=document.getElementById('fi-assign')?.value||'';
+      S.form.project_number=document.getElementById('fi-projnum')?.value||'';
+      S.form.pm=document.getElementById('fi-pm')?.value||'';
+      S.form.due_date=document.getElementById('fi-due')?.value||'';
       await saveTask(); break;
-
-    case 'complete':
-      await completeTask(el.dataset.id); break;
-
-    case 'reopen':
-      await reopenTask(el.dataset.id); break;
-
-    case 'del':
-      await delTask(el.dataset.id); break;
-
-    case 'priority':
-      await setPriority(el.dataset.id, el.value); break;
-
-    case 'logout':
-      sessionStorage.removeItem('etm_access');
-      S.access = null; S.page = 'pin'; S.pins = [];
-      render(); break;
+    case 'complete': await completeTask(el.dataset.id); break;
+    case 'reopen':   await reopenTask(el.dataset.id); break;
+    case 'task-del': await delTask(el.dataset.id); break;
+    case 'priority': await setPriority(el.dataset.id,el.value); break;
+    case 'logout': sessionStorage.removeItem('csm_access'); sessionStorage.removeItem('csm_lang'); S.access=null; S.page='lang'; S.pins=[]; render(); break;
+    case 'pick-files': document.getElementById('fi-files')?.click(); break;
+    case 'remove-file': S.form.pendingFiles.splice(parseInt(el.dataset.i),1); render(); break;
+    case 'add-cl': S.form.checklistItems=[...(S.form.checklistItems||[]),{text:''}]; render(); setTimeout(()=>{const inputs=document.querySelectorAll('.cl-item-input');if(inputs.length)inputs[inputs.length-1].focus();},50); break;
+    case 'remove-cl': S.form.checklistItems.splice(parseInt(el.dataset.i),1); render(); break;
+    case 'check-item': await toggleChecklistItem(el.dataset.tid,el.dataset.cid,el.dataset.done==='0'); break;
+    case 'lightbox': S.lightbox=el.dataset.url; render(); break;
+    case 'close-lightbox': S.lightbox=null; render(); break;
+    case 'report': S.showReport=true; render(); break;
+    case 'close-report': S.showReport=false; render(); break;
+    case 'print-report': window.print(); break;
   }
 }
 
-function submitPin() {
-  const pin = S.pins.join('');
-  if (pin === CFG.ADMIN_PIN) {
-    S.access = 'admin';
-    sessionStorage.setItem('etm_access', 'admin');
-  } else if (pin === CFG.USER_PIN) {
-    S.access = 'user';
-    sessionStorage.setItem('etm_access', 'user');
-  } else {
-    S.pinErr = true; S.pins = [];
-    render(); return;
-  }
-  S.pins = []; S.pinErr = false;
-  S.page = 'tasks';
-  render();
-  loadTasks();
+function onFilePicked(e){
+  const files=Array.from(e.target.files); if(!files.length)return;
+  if(!S.form.pendingFiles)S.form.pendingFiles=[];
+  files.forEach(file=>{
+    const reader=new FileReader();
+    reader.onload=ev=>{S.form.pendingFiles.push({file,preview:ev.target.result});render();};
+    reader.readAsDataURL(file);
+  });
+  e.target.value='';
 }
 
-// ╔══════════════════════════════════════════════════════════╗
-// ║  INIT                                                    ║
-// ╚══════════════════════════════════════════════════════════╝
+function submitPin(){
+  const pin=S.pins.join('');
+  if(pin===CFG.ADMIN_PIN){S.access='admin';sessionStorage.setItem('csm_access','admin');}
+  else if(pin===CFG.USER_PIN){S.access='user';sessionStorage.setItem('csm_access','user');}
+  else{S.pinErr=true;S.pins=[];render();return;}
+  S.pins=[];S.pinErr=false;S.page='tasks';render();loadTasks();
+}
+
 render();
-if (S.page === 'tasks' && db) loadTasks();
+if(S.page==='tasks'&&db)loadTasks();
 </script>
 </body>
 </html>
