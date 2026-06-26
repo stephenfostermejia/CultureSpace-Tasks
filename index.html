@@ -608,7 +608,7 @@ async function onAction(e){
       if(S.pins.length<maxLen){
         S.pins=[...S.pins,el.dataset.v]; S.pinErr=false; render();
         const pinStr=S.pins.join('');
-        if(pinStr.length===CFG.USER_PIN.length||pinStr.length===CFG.ADMIN_PIN.length)setTimeout(submitPin,180);
+        if(pinStr===CFG.USER_PIN||pinStr===CFG.ADMIN_PIN||pinStr.length===Math.max(CFG.USER_PIN.length,CFG.ADMIN_PIN.length))setTimeout(submitPin,180);
       }
       break;
     case 'pin-del': if(S.pins.length>0){S.pins=S.pins.slice(0,-1);S.pinErr=false;render();} break;
